@@ -1,0 +1,17 @@
+{
+    "name": "io-jaegers/sitemap",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "IoJaegers\\Sitemap\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kent vejrup Madsen",
+            "email": "kent.vejrup.madsen@designermadsen.dk"
+        }
+    ],
+    "require": {}
+}
