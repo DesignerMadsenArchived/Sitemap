@@ -30,6 +30,8 @@
         "source": "https://github.com/IO-Jaegers/Sitemap",
         "wiki": "https://github.com/IO-Jaegers/Sitemap/wiki"
     },
+    
+    "homepage": "https://packagist.org/packages/io-jaegers/sitemap",
 
     "scripts":
     {
