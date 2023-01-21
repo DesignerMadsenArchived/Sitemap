@@ -18,8 +18,7 @@
     [
         {
             "name": "Kent vejrup Madsen",
-            "email": "kent.vejrup.madsen@designermadsen.dk",
-            "homepage": "www.designermadsen.dk",
+            "email": "Kent.vejrup.madsen@pm.me",
             "role": "developer"
         }
     ],
@@ -29,7 +28,7 @@
         "email": "support@cloud.iojaegers.com",
         "issues": "https://github.com/IO-Jaegers/Sitemap/issues",
         "source": "https://github.com/IO-Jaegers/Sitemap",
-        "docs": ""
+        "wiki": "https://github.com/IO-Jaegers/Sitemap/wiki"
     },
 
     "scripts":
@@ -46,8 +45,8 @@
 
     "require":
     {
-        "io-jaegers/webformat-kit": "dev-main",
-        "io-jaegers/hrbf": "dev-main",
-        "io-jaegers/file-system": "dev-main"
+        "io-jaegers/webformat-kit": "@dev",
+        "io-jaegers/hrbf": "@dev",
+        "io-jaegers/file-system": "@dev"
     }
 }
