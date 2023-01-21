@@ -2,16 +2,32 @@
     "name": "io-jaegers/sitemap",
     "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "IoJaegers\\Sitemap\\": "src/"
+    "autoload":
+    {
+        "psr-4":
+        {
+            "IoJaegers\\Sitemap\\": "code/"
         }
     },
-    "authors": [
+    "authors":
+    [
         {
             "name": "Kent vejrup Madsen",
             "email": "kent.vejrup.madsen@designermadsen.dk"
         }
     ],
-    "require": {}
+    "scripts":
+    {
+        "test": "IoJaegers\\Sitemap\\Test\\Test::run"
+    },
+    "require-dev":
+    {
+        "phpunit/phpunit": "^9.5"
+    },
+    "minimum-stability": "dev",
+    "require":
+    {
+        "io-jaegers/webformat-kit": "dev-main",
+        "io-jaegers/hrbf": "dev-main"
+    }
 }
