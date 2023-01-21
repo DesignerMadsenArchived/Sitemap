@@ -2,7 +2,7 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain;
+	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
 	
 	
 	/**
@@ -15,5 +15,7 @@
 		case RSS;
 		
 		case TEXT;
+
+        case UNKNOWN;
 	}
 ?>
