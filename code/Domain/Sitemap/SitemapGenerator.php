@@ -7,6 +7,7 @@
 	use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapBuffer;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapOrder;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapType;
+    use IoJaegers\Sitemap\Domain\Sitemap\limiter\TextLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
@@ -45,6 +46,8 @@
             $this->setLogLevel(
                 $logLevel
             );
+
+            $this->generateLimit();
 		}
 
 
@@ -57,6 +60,8 @@
 
         private ?SitemapSetting $settings = null;
         private ?SitemapLogLevel $logLevel = null;
+
+        private ?TextLimit $limit = null;
 
 
         // Execution
@@ -90,6 +95,18 @@
             return false;
         }
 
+        /**
+         * @return void
+         */
+        protected function generateLimit(): void
+        {
+            if( $this->getFileType() == SitemapType::TEXT )
+            {
+                $this->setLimit(
+                    new TextLimit( $this->getBuffer() )
+                );
+            }
+        }
 
 		// Accessors
 		/**
@@ -170,6 +187,22 @@
         public function setLogLevel( ?SitemapLogLevel $logLevel ): void
         {
             $this->logLevel = $logLevel;
+        }
+
+        /**
+         * @return TextLimit|null
+         */
+        public function getLimit(): ?TextLimit
+        {
+            return $this->limit;
+        }
+
+        /**
+         * @param TextLimit|null $limit
+         */
+        public function setLimit(?TextLimit $limit): void
+        {
+            $this->limit = $limit;
         }
 	}
 ?>
