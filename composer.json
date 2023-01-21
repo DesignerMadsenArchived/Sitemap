@@ -26,8 +26,10 @@
 
     "support":
     {
-        "email": "",
-        "issues": ""
+        "email": "support@cloud.iojaegers.com",
+        "issues": "https://github.com/IO-Jaegers/Sitemap/issues",
+        "source": "https://github.com/IO-Jaegers/Sitemap",
+        "docs": ""
     },
 
     "scripts":
