@@ -19,7 +19,8 @@
         /**
          *
          */
-		public function __construct()
+		public function __construct( SitemapType $sitemapFileType = SitemapType::TEXT,
+                                     SitemapLogLevel $logLevel = SitemapLogLevel::WARNING )
 		{
             $this->setSettings(
                 new SitemapSetting()
@@ -38,11 +39,11 @@
             );
 
             $this->setFileType(
-                SitemapType::TEXT
+                $sitemapFileType
             );
 
             $this->setLogLevel(
-                SitemapLogLevel::WARNING
+                $logLevel
             );
 		}
 
@@ -53,10 +54,43 @@
 		private ?SitemapOrder $order = null;
 		
 		private ?SitemapType $fileType = null;
+
         private ?SitemapSetting $settings = null;
         private ?SitemapLogLevel $logLevel = null;
-		
-		
+
+
+        // Execution
+        /**
+         * @param string $url
+         * @return bool
+         */
+        public function add( string $url ): bool
+        {
+
+            return false;
+        }
+
+        /**
+         * @param string $url
+         * @return bool
+         */
+        public function delete( string $url ): bool
+        {
+            return false;
+        }
+
+        /**
+         * @param string $urlInSet
+         * @param string $urlTo
+         * @return bool
+         */
+        public function replace( string $urlInSet, string $urlTo ): bool
+        {
+
+            return false;
+        }
+
+
 		// Accessors
 		/**
 		 * @return SitemapBuffer|null
@@ -130,11 +164,10 @@
             return $this->logLevel;
         }
 
-
         /**
          * @param SitemapLogLevel|null $logLevel
          */
-        public function setLogLevel(?SitemapLogLevel $logLevel): void
+        public function setLogLevel( ?SitemapLogLevel $logLevel ): void
         {
             $this->logLevel = $logLevel;
         }

@@ -45,6 +45,18 @@
             $array = explode(PHP_EOL, $this->getTestExample());
 
             echo "Test: \r\n";
+
+            $idx = null;
+            $size = count( $array );
+
+            for( $idx = 0;
+                 $idx < $size;
+                 $idx++ )
+            {
+                $current = $array[$idx];
+                $this->getGenerator()->add( $current );
+            }
+
             print_r( $this->getGenerator() );
             echo "END ===>";
             echo "\r\n";
