@@ -2,7 +2,7 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap;
+	namespace IoJaegers\Sitemap\Test;
 	
 	/**
 	 *
