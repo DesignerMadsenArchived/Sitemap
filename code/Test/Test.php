@@ -6,11 +6,17 @@
 	
 	use IoJaegers\Sitemap\Domain\Sitemap\SitemapGenerator;
 
+
     /**
 	 *
 	 */
 	class Test
 	{
+        private string $url = "https://www.xml-sitemaps.com/urllist.txt";
+
+        private ?string $test_example = null;
+        private ?SitemapGenerator $generator;
+
 		/**
 		 * @return int
 		 */
@@ -25,13 +31,74 @@
 		 */
 		public function runTest(): int
 		{
-            echo "running test \r\n";
-            $generator = new SitemapGenerator();
-            print_r( $generator );
+            $this->setGenerator(
+                new SitemapGenerator()
+            );
 
+            $this->setTestExample(
+                file_get_contents(
+                    $this->getUrl()
+                )
+            );
+
+            echo "RUNNING TEST - CODE ===> \r\n";
+            $array = explode(PHP_EOL, $this->getTestExample());
+
+            echo "Test: \r\n";
+            print_r( $this->getGenerator() );
+            echo "END ===>";
             echo "\r\n";
+
 
 			return 0;
 		}
+
+        /**
+         * @return string
+         */
+        public function getUrl(): string
+        {
+            return $this->url;
+        }
+
+        /**
+         * @param string $url
+         */
+        public function setUrl( string $url ): void
+        {
+            $this->url = $url;
+        }
+
+        /**
+         * @return SitemapGenerator|null
+         */
+        public function getGenerator(): ?SitemapGenerator
+        {
+            return $this->generator;
+        }
+
+        /**
+         * @param SitemapGenerator|null $generator
+         */
+        public function setGenerator( ?SitemapGenerator $generator ): void
+        {
+            $this->generator = $generator;
+        }
+
+        /**
+         * @return string|null
+         */
+        public function getTestExample(): ?string
+        {
+            return $this->test_example;
+        }
+
+        /**
+         * @param string|null $test_example
+         */
+        public function setTestExample(?string $test_example): void
+        {
+            $this->test_example = $test_example;
+        }
 	}
 ?>

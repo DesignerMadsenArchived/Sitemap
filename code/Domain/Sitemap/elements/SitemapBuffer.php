@@ -3,22 +3,26 @@
 	 *
 	 */
 	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
-	
-	
-	/**
+
+	use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
+
+
+    /**
 	 * 
 	 */
 	class SitemapBuffer
 	{
 		// constructors
-		public function __construct()
+		public function __construct( ?SitemapSetting $setting )
 		{
+            $this->setSettings( $setting );
             $this->setEntries( array() );
 		}
 		
 		
 		// Variables
 		private ?array $entries = null;
+        private ?SitemapSetting $settings = null;
 		
 		// Accessors
 		/**
@@ -36,5 +40,21 @@
 		{
 			$this->entries = $entries;
 		}
+
+        /**
+         * @param SitemapSetting|null $settings
+         */
+        public function setSettings(?SitemapSetting $settings): void
+        {
+            $this->settings = $settings;
+        }
+
+        /**
+         * @return SitemapSetting|null
+         */
+        public function getSettings(): ?SitemapSetting
+        {
+            return $this->settings;
+        }
 	}
 ?>

@@ -15,5 +15,7 @@
 		case RSS;
 		
 		case TEXT;
+
+        case UNKNOWN;
 	}
 ?>

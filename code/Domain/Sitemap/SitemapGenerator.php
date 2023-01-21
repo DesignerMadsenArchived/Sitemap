@@ -7,7 +7,7 @@
 	use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapBuffer;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapOrder;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapType;
-    use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSettings;
+    use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
     /**
@@ -16,23 +16,45 @@
 	class SitemapGenerator
 	{
 		// Constructor
+        /**
+         *
+         */
 		public function __construct()
 		{
-            $this->setBuffer( new SitemapBuffer() );
-            $this->setOrder( new SitemapOrder() );
+            $this->setSettings(
+                new SitemapSetting()
+            );
 
-            $this->setFileType( SitemapType::XML );
-            $this->setSettings( new SitemapSettings() );
+            $this->setBuffer(
+                new SitemapBuffer(
+                    $this->getSettings()
+                )
+            );
+
+            $this->setOrder(
+                new SitemapOrder(
+                    $this->getSettings()
+                )
+            );
+
+            $this->setFileType(
+                SitemapType::TEXT
+            );
+
+            $this->setLogLevel(
+                SitemapLogLevel::WARNING
+            );
 		}
-		
-		
+
+
 		// Variables
 		private ?SitemapBuffer $buffer = null;
 		
 		private ?SitemapOrder $order = null;
 		
 		private ?SitemapType $fileType = null;
-        private ?SitemapSettings $settings = null;
+        private ?SitemapSetting $settings = null;
+        private ?SitemapLogLevel $logLevel = null;
 		
 		
 		// Accessors
@@ -85,19 +107,36 @@
 		}
 
         /**
-         * @return SitemapSettings|null
+         * @return SitemapSetting|null
          */
-        public function getSettings(): ?SitemapSettings
+        public function getSettings(): ?SitemapSetting
         {
             return $this->settings;
         }
 
         /**
-         * @param SitemapSettings|null $settings
+         * @param SitemapSetting|null $settings
          */
-        public function setSettings( ?SitemapSettings $settings ): void
+        public function setSettings( ?SitemapSetting $settings ): void
         {
             $this->settings = $settings;
+        }
+
+        /**
+         * @return SitemapLogLevel|null
+         */
+        public function getLogLevel(): ?SitemapLogLevel
+        {
+            return $this->logLevel;
+        }
+
+
+        /**
+         * @param SitemapLogLevel|null $logLevel
+         */
+        public function setLogLevel(?SitemapLogLevel $logLevel): void
+        {
+            $this->logLevel = $logLevel;
         }
 	}
 ?>

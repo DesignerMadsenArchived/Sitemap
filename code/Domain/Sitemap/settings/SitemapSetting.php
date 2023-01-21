@@ -8,7 +8,7 @@
 	/**
 	 * 
 	 */
-	class SitemapSettings
+	class SitemapSetting
 	{
 		public function __construct()
 		{

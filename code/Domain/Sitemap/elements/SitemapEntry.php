@@ -3,7 +3,8 @@
 	 *
 	 */
 	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
-		
+
+
 	/**
 	 * 
 	 */
@@ -14,11 +15,12 @@
 		{
 		
 		}
-		
-		
+
+
 		// Variables
 		private ?string $url = null;
-		
+
+
 		// Accessors
 		/**
 		 * @return string|null
