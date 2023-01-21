@@ -2,6 +2,7 @@
     "name": "io-jaegers/sitemap",
     "type": "library",
     "description": "Package with the purpose of generating sitemap files, in various format.",
+    "version": "dev-0.5.0",
 
     "license": "MIT",
 
@@ -17,9 +18,17 @@
     [
         {
             "name": "Kent vejrup Madsen",
-            "email": "kent.vejrup.madsen@designermadsen.dk"
+            "email": "kent.vejrup.madsen@designermadsen.dk",
+            "homepage": "www.designermadsen.dk",
+            "role": "developer"
         }
     ],
+
+    "support":
+    {
+        "email": "",
+        "issues": ""
+    },
 
     "scripts":
     {
