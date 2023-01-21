@@ -5,9 +5,14 @@
 	namespace IoJaegers\Sitemap\Domain\Sitemap;
 	
 	use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapBuffer;
+    use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapLogLevel;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapOrder;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapType;
+
+    use IoJaegers\Sitemap\Domain\Sitemap\limiter\Limit;
+    use IoJaegers\Sitemap\Domain\Sitemap\limiter\RSSLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\TextLimit;
+    use IoJaegers\Sitemap\Domain\Sitemap\limiter\XMLLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
@@ -69,19 +74,35 @@
          * @param string $url
          * @return bool
          */
-        public function add( string $url ): bool
+        public final function add( string $url ): bool
         {
+            return $this->getBuffer()->create( $url );
+        }
 
-            return false;
+        /**
+         * @param array $urls
+         * @return int|bool
+         */
+        public final function addListOfUrls( array $urls ): int|bool
+        {
+            return $this->getBuffer()->createFrom( $urls );
         }
 
         /**
          * @param string $url
          * @return bool
          */
-        public function delete( string $url ): bool
+        public final function delete( string $url ): bool
         {
             return false;
+        }
+
+        /**
+         * @return void
+         */
+        public final function clear(): void
+        {
+            $this->getBuffer()->clear();
         }
 
         /**
@@ -89,7 +110,7 @@
          * @param string $urlTo
          * @return bool
          */
-        public function replace( string $urlInSet, string $urlTo ): bool
+        public final function replace( string $urlInSet, string $urlTo ): bool
         {
 
             return false;
@@ -98,21 +119,71 @@
         /**
          * @return void
          */
-        protected function generateLimit(): void
+        protected final function generateLimit(): void
         {
+            if( !is_null( $this->limit ) )
+            {
+                unset( $this->limit );
+            }
+
             if( $this->getFileType() == SitemapType::TEXT )
             {
                 $this->setLimit(
-                    new TextLimit( $this->getBuffer() )
+                    $this->generateLimitForText()
+                );
+            }
+
+            if( $this->getFileType() == SitemapType::XML )
+            {
+                $this->setLimit(
+                    $this->generateLimitForXML()
+                );
+            }
+
+            if( $this->getFileType() == SitemapType::RSS )
+            {
+                $this->setLimit(
+                    $this->generateLimitForRSS()
                 );
             }
         }
+
+        /**
+         * @return TextLimit
+         */
+        private function generateLimitForText(): TextLimit
+        {
+            return new TextLimit(
+                $this->getBuffer()
+            );
+        }
+
+        /**
+         * @return RSSLimit
+         */
+        private function generateLimitForRSS(): RSSLimit
+        {
+            return new RSSLimit(
+                $this->getBuffer()
+            );
+        }
+
+        /**
+         * @return XMLLimit
+         */
+        private function generateLimitForXML(): XMLLimit
+        {
+            return new XMLLimit(
+                $this->getBuffer()
+            );
+        }
+
 
 		// Accessors
 		/**
 		 * @return SitemapBuffer|null
 		 */
-		public function getBuffer(): ?SitemapBuffer
+		public final function getBuffer(): ?SitemapBuffer
 		{
 			return $this->buffer;
 		}
@@ -120,7 +191,7 @@
 		/**
 		 * @param SitemapBuffer|null $buffer
 		 */
-		public function setBuffer( ?SitemapBuffer $buffer ): void
+		public final function setBuffer( ?SitemapBuffer $buffer ): void
 		{
 			$this->buffer = $buffer;
 		}
@@ -128,7 +199,7 @@
 		/**
 		 * @return SitemapOrder|null
 		 */
-		public function getOrder(): ?SitemapOrder
+		public final function getOrder(): ?SitemapOrder
 		{
 			return $this->order;
 		}
@@ -136,7 +207,7 @@
 		/**
 		 * @param SitemapOrder|null $order
 		 */
-		public function setOrder( ?SitemapOrder $order ): void
+		public final function setOrder( ?SitemapOrder $order ): void
 		{
 			$this->order = $order;
 		}
@@ -144,7 +215,7 @@
 		/**
 		 * @return SitemapType|null
 		 */
-		public function getFileType(): ?SitemapType
+		public final function getFileType(): ?SitemapType
 		{
 			return $this->fileType;
 		}
@@ -152,15 +223,17 @@
 		/**
 		 * @param SitemapType|null $fileType
 		 */
-		public function setFileType( ?SitemapType $fileType ): void
+		public final function setFileType( ?SitemapType $fileType ): void
 		{
 			$this->fileType = $fileType;
+
+            $this->generateLimit();
 		}
 
         /**
          * @return SitemapSetting|null
          */
-        public function getSettings(): ?SitemapSetting
+        public final function getSettings(): ?SitemapSetting
         {
             return $this->settings;
         }
@@ -168,7 +241,7 @@
         /**
          * @param SitemapSetting|null $settings
          */
-        public function setSettings( ?SitemapSetting $settings ): void
+        public final function setSettings( ?SitemapSetting $settings ): void
         {
             $this->settings = $settings;
         }
@@ -176,7 +249,7 @@
         /**
          * @return SitemapLogLevel|null
          */
-        public function getLogLevel(): ?SitemapLogLevel
+        public final function getLogLevel(): ?SitemapLogLevel
         {
             return $this->logLevel;
         }
@@ -184,7 +257,7 @@
         /**
          * @param SitemapLogLevel|null $logLevel
          */
-        public function setLogLevel( ?SitemapLogLevel $logLevel ): void
+        public final function setLogLevel( ?SitemapLogLevel $logLevel ): void
         {
             $this->logLevel = $logLevel;
         }
@@ -192,7 +265,7 @@
         /**
          * @return TextLimit|null
          */
-        public function getLimit(): ?TextLimit
+        public final function getLimit(): ?Limit
         {
             return $this->limit;
         }
@@ -200,7 +273,7 @@
         /**
          * @param TextLimit|null $limit
          */
-        public function setLimit(?TextLimit $limit): void
+        public final function setLimit( ?Limit $limit ): void
         {
             $this->limit = $limit;
         }

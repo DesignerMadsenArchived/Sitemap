@@ -10,32 +10,49 @@
 	 */
 	class SitemapEntry
 	{
+        public static function create( string $url ): ?SitemapEntry
+        {
+            $url = parse_url( $url );
+
+            if( $url === false )
+            {
+                return null;
+            }
+
+            $entry = new SitemapEntry();
+            $entry->setUrl( $url );
+
+            return $entry;
+        }
+
 		// Constructor
+        /**
+         *
+         */
 		public function __construct()
 		{
-		
+
 		}
 
-
-		// Variables
-		private ?string $url = null;
+        // Variables
+		private ?array $url = null;
 
 
 		// Accessors
-		/**
-		 * @return string|null
-		 */
-		public function getUrl(): ?string
-		{
-			return $this->url;
-		}
-		
-		/**
-		 * @param string|null $url
-		 */
-		public function setUrl( ?string $url ): void
-		{
-			$this->url = $url;
-		}
+        /**
+         * @return array|null
+         */
+        public function getUrl(): ?array
+        {
+            return $this->url;
+        }
+
+        /**
+         * @param array|null $url
+         */
+        public function setUrl( ?array $url ): void
+        {
+            $this->url = $url;
+        }
 	}
 ?>

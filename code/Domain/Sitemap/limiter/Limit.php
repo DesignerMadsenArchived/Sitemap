@@ -20,10 +20,25 @@
             $this->setBuffer( $buffer );
         }
 
+        /**
+         * @return bool
+         */
         public abstract function checkLimit(): bool;
 
+        /**
+         * @return bool
+         */
         public abstract function hitWarning(): bool;
+
+        /**
+         * @return bool
+         */
         public abstract function hitNotice(): bool;
+
+        /**
+         * @return int
+         */
+        public abstract function queue(): int;
 
         // Variable
         private ?SitemapBuffer $buffer = null;

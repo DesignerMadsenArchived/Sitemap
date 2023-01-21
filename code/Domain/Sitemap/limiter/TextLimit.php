@@ -19,12 +19,13 @@
         public function __construct( ?SitemapBuffer $buffer )
         {
             parent::__construct( $buffer );
+
         }
 
         /**
          * @return bool
          */
-        public function checkLimit(): bool
+        public final function checkLimit(): bool
         {
             return false;
         }
@@ -32,7 +33,7 @@
         /**
          * @return bool
          */
-        public function hitWarning(): bool
+        public final function hitWarning(): bool
         {
 
             return true;
@@ -41,10 +42,19 @@
         /**
          * @return bool
          */
-        public function hitNotice(): bool
+        public final function hitNotice(): bool
         {
 
             return true;
+        }
+
+        /**
+         * @return int
+         */
+        public function queue(): int
+        {
+            // TODO: Implement queue() method.
+            return -1;
         }
     };
 ?>

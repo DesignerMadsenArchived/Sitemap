@@ -13,6 +13,9 @@
 	class SitemapOrder
 	{
         // Constructor
+        /**
+         * @param SitemapSetting|null $setting
+         */
 		public function __construct( ?SitemapSetting $setting )
 		{
             $this->setSettings( $setting );

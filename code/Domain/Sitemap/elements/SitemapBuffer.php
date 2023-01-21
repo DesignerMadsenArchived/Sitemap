@@ -13,7 +13,10 @@
 	class SitemapBuffer
 	{
 		// constructors
-		public function __construct( ?SitemapSetting $setting )
+        /**
+         * @param SitemapSetting|null $setting
+         */
+        public function __construct( ?SitemapSetting $setting )
 		{
             $this->setSettings( $setting );
             $this->setEntries( array() );
@@ -22,7 +25,8 @@
                 new SitemapBufferState( $this )
             );
 
-            $this->getState()->calculate();
+            $this->getState()
+                 ->calculate();
 		}
 		
 		
@@ -36,13 +40,55 @@
 
         // Execute
         /**
+         * @param string $url
          * @return bool
          */
-        public function create(): bool
+        public function create( string $url ): bool
         {
+            $url = SitemapEntry::create( $url );
+
+            if( is_null( $url ) )
+            {
+                return false;
+            }
+
+            array_push( $this->entries,
+                             $url );
 
             $this->updateState();
-            return false;
+            return true;
+        }
+
+
+        /**
+         * @param array $urls
+         * @return int|bool
+         */
+        public function createFrom( array $urls ): int|bool
+        {
+            $sizeOfArray = count( $urls );
+            $idx = self::zero;
+
+            for( $idx = self::zero;
+                 $idx < $sizeOfArray;
+                 $idx++ )
+            {
+                $current = $urls[$idx];
+
+                $url = SitemapEntry::create( $current );
+
+                if( is_null( $url ) )
+                {
+                    return $idx;
+                }
+
+                array_push( $this->entries,
+                                  $url );
+            }
+
+            $this->updateState();
+
+            return true;
         }
 
         /**
@@ -74,6 +120,15 @@
             return false;
         }
 
+        /**
+         * @return void
+         */
+        public function clear(): void
+        {
+            unset($this->entries);
+            $this->entries = array();
+        }
+
 
         /**
          * @return int
@@ -91,6 +146,7 @@
         {
             $this->getState()
                  ->calculate();
+
             return false;
         }
 

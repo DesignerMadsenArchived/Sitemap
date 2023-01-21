@@ -10,6 +10,9 @@
 	class SitemapBufferState
 	{
 		// Constructor
+        /**
+         * @param SitemapBuffer $buffer
+         */
 		public function __construct( SitemapBuffer $buffer )
 		{
             $this->setBuffer(
@@ -17,7 +20,8 @@
             );
 
             $this->setSizeOfBuffer(
-                self::zero
+                new Counter( value:
+                             self::zero )
             );
 		}
 
@@ -26,15 +30,28 @@
          */
         public function calculate(): void
         {
-
+            if( $this->isBufferSet() )
+            {
+                $this->getSizeOfBuffer()
+                     ->setValue(
+                    count( $this->getBuffer()
+                                ->getEntries()
+                    )
+                );
+            }
         }
 
 		// Variables
         private SitemapBuffer $buffer;
-        private int $sizeOfBuffer;
+        private Counter $sizeOfBuffer;
 
         const zero = 0;
 
+
+        public function isBufferSet(): bool
+        {
+            return isset($this->buffer);
+        }
 
         /**
          * @return SitemapBuffer
@@ -53,17 +70,18 @@
         }
 
         /**
-         * @return int
+         * @return Counter
          */
-        public function getSizeOfBuffer(): int
+        public function getSizeOfBuffer(): Counter
         {
             return $this->sizeOfBuffer;
         }
 
         /**
-         * @param int $sizeOfBuffer
+         * @param Counter $sizeOfBuffer
+         * @return void
          */
-        public function setSizeOfBuffer( int $sizeOfBuffer ): void
+        public function setSizeOfBuffer( Counter $sizeOfBuffer ): void
         {
             $this->sizeOfBuffer = $sizeOfBuffer;
         }
