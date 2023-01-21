@@ -28,6 +28,7 @@
     "require":
     {
         "io-jaegers/webformat-kit": "dev-main",
-        "io-jaegers/hrbf": "dev-main"
+        "io-jaegers/hrbf": "dev-main",
+        "io-jaegers/file-system": "dev-main"
     }
 }

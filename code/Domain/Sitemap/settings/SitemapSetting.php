@@ -2,12 +2,13 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain;
-		
+    namespace IoJaegers\Sitemap\Domain\Sitemap\settings;
+
+
 	/**
 	 * 
 	 */
-	class SitemapOrder
+	class SitemapSetting
 	{
 		public function __construct()
 		{
