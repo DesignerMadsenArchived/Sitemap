@@ -2,16 +2,17 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain;
-	
+	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+		
 	/**
-	 *
+	 * 
 	 */
-	class SitemapGenerator
+	class SitemapOrder
 	{
 		public function __construct()
 		{
 		
 		}
+	
 	}
 ?>

@@ -2,13 +2,13 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain;
+	namespace IoJaegers\Sitemap\Domain\Timestamp;
 		
 	/**
 	 * 
 	 */
 	enum TimestampType
 	{
-		
+		case Unknown;
 	}
 ?>
