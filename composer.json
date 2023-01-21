@@ -2,6 +2,7 @@
     "name": "io-jaegers/sitemap",
     "type": "library",
     "description": "Package with the purpose of generating sitemap files, in various format.",
+    "version": "dev-0.5.0",
 
     "license": "MIT",
 
@@ -17,9 +18,18 @@
     [
         {
             "name": "Kent vejrup Madsen",
-            "email": "kent.vejrup.madsen@designermadsen.dk"
+            "email": "Kent.vejrup.madsen@pm.me",
+            "role": "developer"
         }
     ],
+
+    "support":
+    {
+        "email": "support@cloud.iojaegers.com",
+        "issues": "https://github.com/IO-Jaegers/Sitemap/issues",
+        "source": "https://github.com/IO-Jaegers/Sitemap",
+        "wiki": "https://github.com/IO-Jaegers/Sitemap/wiki"
+    },
 
     "scripts":
     {
@@ -35,8 +45,8 @@
 
     "require":
     {
-        "io-jaegers/webformat-kit": "dev-main",
-        "io-jaegers/hrbf": "dev-main",
-        "io-jaegers/file-system": "dev-main"
+        "io-jaegers/webformat-kit": "@dev",
+        "io-jaegers/hrbf": "@dev",
+        "io-jaegers/file-system": "@dev"
     }
 }
