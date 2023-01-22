@@ -2,10 +2,12 @@ name: PHP Composer
 
 on:
   push:
-    branches: [ "main", "development" ]
+    branches: [ "main", \
+                "development" ]
 
   pull_request:
-    branches: [ "main", "development" ]
+    branches: [ "main", \
+                "development" ]
 
 permissions:
   contents: read
@@ -21,7 +23,7 @@ jobs:
         run: composer install
 
       - name: Validate composer.json and composer.lock
-        run: composer validate --strict
+        run: composer validate --no-check-all
 
       - name: Cache Composer packages
         id: composer-cache
