@@ -34,7 +34,7 @@
         /**
          * @return SitemapBuffer|null
          */
-        public function getBuffer(): ?SitemapBuffer
+        public final function getBuffer(): ?SitemapBuffer
         {
             return $this->buffer;
         }
@@ -42,7 +42,7 @@
         /**
          * @param SitemapBuffer|null $buffer
          */
-        public function setBuffer( ?SitemapBuffer $buffer ): void
+        public final function setBuffer( ?SitemapBuffer $buffer ): void
         {
             $this->buffer = $buffer;
         }

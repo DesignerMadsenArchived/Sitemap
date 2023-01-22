@@ -42,9 +42,9 @@
             );
 
             echo "RUNNING TEST - CODE ===> \r\n";
-            $array = explode(PHP_EOL, $this->getTestExample());
+            $array = explode( PHP_EOL,
+                              $this->getTestExample() );
 
-            /**
             echo "Test: \r\n";
 
             $idx = null;
@@ -55,17 +55,9 @@
                  $idx++ )
             {
                 $current = $array[$idx];
-                $this->getGenerator()->add( $current );
-            }
-
-            print_r(
                 $this->getGenerator()
-                     ->getWriter()
-                     ->write()
-            );
-             *
-             *
-             **/
+                     ->add( $current );
+            }
 
             echo "ROW FORMAT ====> \r\n";
             $this->getGenerator()
@@ -77,8 +69,8 @@
 
             print_r(
                 $this->getGenerator()
-                    ->getWriter()
-                    ->write()
+                     ->getWriter()
+                     ->write()
             );
 
             echo "END ===>";
