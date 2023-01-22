@@ -1,23 +1,24 @@
 <?php
     /**
- *
+      *
      */
     namespace IoJaegers\Sitemap\Send;
 
-    use CurlHandle;
 
     /**
      *
      */
     class GoogleSend
+        extends PingService
     {
         /**
          * @param string $url
+         * @throws \Exception
          */
         public function __construct( string $url )
         {
+            parent::__construct();
             $this->setUrl( $url );
-            $this->setCh( curl_init() );
         }
 
         /**
@@ -25,92 +26,70 @@
          */
         public function __destruct()
         {
-            curl_close( $this->getCh() );
-        }
+            if(
+                !is_null(
+                    $this->getCurl()
+                )
+            )
+            {
+                curl_close(
+                    $this->getCurl()
+                );
+            }
 
-        private ?string $url = null;
-        private $ch = null;
-        private bool $successful = false;
+        }
 
         const google_url = 'https://www.google.com/ping?sitemap=';
 
-        const RESPONSE_SUCCESSFUL = 200;
 
         /**
-         * @return void
+         * @return string
+         * @throws \Exception
          */
-        public function send()
+        public function fullLink(): string
         {
-            curl_setopt( $this->getCh(),
-                CURLOPT_URL,
-                $this->getLink() );
-
-            curl_setopt( $this->getCh(),
-                CURLOPT_RETURNTRANSFER,
-                1 );
-
-            curl_exec( $this->getCh() );
-
-            $info = curl_getinfo( $this->getCh(), CURLINFO_RESPONSE_CODE );
-
-            if( $info == self::RESPONSE_SUCCESSFUL )
+            if( is_string( $this->getUrl() ) )
             {
-                $this->setSuccessful( true );
+                return self::google_url . $this->getUrl();
+            }
+            else
+            {
+                throw new \Exception('URL NOT INITIALISED AS A STRING');
             }
         }
 
-        protected function getLink()
-        {
-            return self::google_url . $this->getUrl();
-        }
-
         /**
-         * @return string|null
+         * @return void
+         * @throws \Exception
          */
-        public function getUrl(): ?string
+        protected final function options(): void
         {
-            return $this->url;
+            curl_setopt( $this->getCurl(), CURLOPT_URL, $this->fullLink() );
+            curl_setopt( $this->getCurl(), CURLOPT_RETURNTRANSFER, 1 );
         }
 
         /**
-         * @param string|null $url
-         */
-        public function setUrl( ?string $url ): void
-        {
-            $this->url = $url;
-        }
-
-        /**
-         * @return CurlHandle
-         */
-        public function getCh(): CurlHandle
-        {
-            return $this->ch;
-        }
-
-        /**
-         * @param CurlHandle $ch
          * @return void
          */
-        public function setCh( CurlHandle $ch ): void
+        public function send(): void
         {
-            $this->ch = $ch;
-        }
+            $message = curl_exec( $this->getCurl() );
 
-        /**
-         * @return bool
-         */
-        public function isSuccessful(): bool
-        {
-            return $this->successful;
-        }
+            $info = curl_getinfo( $this->getCurl(), CURLINFO_RESPONSE_CODE );
 
-        /**
-         * @param bool $successful
-         */
-        public function setSuccessful(bool $successful): void
-        {
-            $this->successful = $successful;
+            if( $info == HTTPResponseTable::RESPONSE_SUCCESSFUL )
+            {
+                $this->setSuccessful( true );
+
+                if( $this->getIsDebugging() )
+                {
+                    $this->setResponse( $message );
+                }
+                else
+                {
+                    unset( $message );
+                }
+            }
         }
     }
 ?>
