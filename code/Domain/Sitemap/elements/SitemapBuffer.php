@@ -28,8 +28,7 @@
             $this->getState()
                  ->calculate();
 		}
-		
-		
+
 		// Variables
 		private ?array $entries = null;
         private ?SitemapSetting $settings = null;

@@ -9,6 +9,7 @@
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapOrder;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapType;
 
+    use IoJaegers\Sitemap\Domain\Sitemap\io\IOWriter;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\Limit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\RSSLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\TextLimit;
@@ -67,6 +68,7 @@
         private ?SitemapLogLevel $logLevel = null;
 
         private ?TextLimit $limit = null;
+        private ?IOWriter $writer = null;
 
 
         // Execution
