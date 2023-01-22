@@ -38,4 +38,37 @@
             return $this->generator;
         }
     }
+
+    /**
+     * @return void
+
+    protected final function generateWriter(): void
+    {
+        if( !is_null( $this->writer ) )
+        {
+            unset( $this->limit );
+        }
+
+        if( $this->getFileType() == SitemapType::TEXT )
+        {
+            $this->setWriter(
+                $this->generateTextWriter()
+            );
+        }
+
+        if( $this->getFileType() == SitemapType::XML )
+        {
+            $this->setWriter(
+                $this->generateXMLWriter()
+            );
+        }
+
+        if( $this->getFileType() == SitemapType::RSS )
+        {
+            $this->setWriter(
+                $this->generateRSSWriter()
+            );
+        }
+    }
+     */
 ?>

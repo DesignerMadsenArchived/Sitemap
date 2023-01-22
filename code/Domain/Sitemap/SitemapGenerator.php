@@ -166,72 +166,8 @@
          */
         protected final function generateInternalStructure(): void
         {
-            $this->generateLimit();
-            $this->generateWriter();
-        }
-
-        /**
-         * @return void
-         */
-        protected final function generateLimit(): void
-        {
-            if( !is_null( $this->limit ) )
-            {
-                unset( $this->limit );
-            }
-
-            if( $this->getFileType() == SitemapType::TEXT )
-            {
-                $this->setLimit(
-                    $this->generateLimitForText()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::XML )
-            {
-                $this->setLimit(
-                    $this->generateLimitForXML()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::RSS )
-            {
-                $this->setLimit(
-                    $this->generateLimitForRSS()
-                );
-            }
-        }
-
-        /**
-         * @return void
-         */
-        protected final function generateWriter(): void
-        {
-            if( !is_null( $this->writer ) )
-            {
-                unset( $this->limit );
-            }
-
-            if( $this->getFileType() == SitemapType::TEXT )
-            {
-                $this->setWriter(
-                    $this->generateTextWriter()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::XML )
-            {
-                $this->setWriter(
-                    $this->generateXMLWriter()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::RSS )
-            {
-                $this->setWriter(
-                    $this->generateRSSWriter()
-                );
-            }
+            $this->getLimitFactory()->generate();
+            $this->getWriterFactory()->generate();
         }
 
         /**
