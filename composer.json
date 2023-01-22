@@ -38,7 +38,8 @@
     "suggest":
     {
         "ext-xml": "package needed inorder to read xml files",
-        "ext-zend opcache": "needed for performance upgrades"
+        "ext-zend opcache": "needed for performance upgrades",
+        "ext-curl": "needed to make pings for the sitemap"
     },
 
     "homepage": "https://packagist.org/packages/io-jaegers/sitemap",
@@ -59,6 +60,7 @@
     {
         "io-jaegers/webformat-kit": "@dev",
         "io-jaegers/hrbf": "@dev",
-        "io-jaegers/file-system": "@dev"
+        "io-jaegers/file-system": "@dev",
+        "ext-curl": "*"
     }
 }

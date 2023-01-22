@@ -54,6 +54,7 @@
 
             $this->appendToBuffer( $url );
             $this->updateState();
+
             return true;
         }
 
@@ -69,7 +70,7 @@
 
             for( $idx = self::zero;
                  $idx < $sizeOfArray;
-                 $idx++ )
+                 $idx ++ )
             {
                 $current = $urls[$idx];
 
@@ -95,8 +96,7 @@
          */
         protected final function appendToBuffer( SitemapEntry $entry ): void
         {
-            array_push($this->entries,
-                             $entry );
+            array_push($this->entries, $entry );
         }
 
         /**
@@ -105,7 +105,8 @@
          */
         public function read( int $urlPosition ): string
         {
-            return "";
+            return $this->getEntryAtIndex( $urlPosition )
+                        ->toString();
         }
 
         /**
@@ -137,6 +138,40 @@
             $this->entries = array();
         }
 
+        /**
+         * @param $url
+         * @return bool
+         */
+        public function existUrl( $url ): bool
+        {
+            $size = $this->getState()->getSizeOfBuffer()->getValue();
+            $index = null;
+            $result = false;
+
+            for( $index = self::zero;
+                 $index< $size;
+                 $index++ )
+            {
+                $entry = $this->getEntryAtIndex( $index );
+                $url_parsed = parse_url( $url );
+
+                if( $url_parsed[ 'path' ] == $entry->getUrlPath() )
+                {
+                    $result = true;
+                }
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param int $index
+         * @return SitemapEntry
+         */
+        public function getEntryAtIndex( int $index ): SitemapEntry
+        {
+            return $this->getEntries()[$index];
+        }
 
         /**
          * @return int

@@ -33,7 +33,7 @@
         /**
          * @return bool
          */
-        public final function hitWarning(): bool
+        public final function hasHitWarning(): bool
         {
 
             return true;
@@ -42,7 +42,7 @@
         /**
          * @return bool
          */
-        public final function hitNotice(): bool
+        public final function hasHitNotice(): bool
         {
 
             return true;
@@ -51,7 +51,7 @@
         /**
          * @return int
          */
-        public function queue(): int
+        public function queueNewList(): int
         {
             // TODO: Implement queue() method.
             return -1;

@@ -4,7 +4,7 @@
 	 */
     namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
 
-	use IoJaegers\Sitemap\Domain\TBM\Counter;
+	use IoJaegers\Sitemap\Domain\TBM\IntegerCounter;
 
     /**
 	 * 
@@ -22,7 +22,7 @@
             );
 
             $this->setSizeOfBuffer(
-                new Counter( value:
+                new IntegerCounter( value:
                              self::zero )
             );
 		}
@@ -45,7 +45,7 @@
 
 		// Variables
         private SitemapBuffer $buffer;
-        private Counter $sizeOfBuffer;
+        private IntegerCounter $sizeOfBuffer;
 
         const zero = 0;
 
@@ -72,18 +72,18 @@
         }
 
         /**
-         * @return Counter
+         * @return IntegerCounter
          */
-        public function getSizeOfBuffer(): Counter
+        public function getSizeOfBuffer(): IntegerCounter
         {
             return $this->sizeOfBuffer;
         }
 
         /**
-         * @param Counter $sizeOfBuffer
+         * @param IntegerCounter $sizeOfBuffer
          * @return void
          */
-        public function setSizeOfBuffer( Counter $sizeOfBuffer ): void
+        public function setSizeOfBuffer(IntegerCounter $sizeOfBuffer ): void
         {
             $this->sizeOfBuffer = $sizeOfBuffer;
         }

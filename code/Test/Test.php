@@ -5,6 +5,7 @@
 	namespace IoJaegers\Sitemap\Test;
 	
 	use IoJaegers\Sitemap\Domain\Sitemap\SitemapGenerator;
+    use IoJaegers\Sitemap\Send\GoogleSend;
 
 
     /**
@@ -23,13 +24,26 @@
 		public static function run(): int
 		{
 			$test = new Test();
-			return $test->runTest();
+			return $test->runTestB();
 		}
+
+        /**
+         * @return int
+         * @throws \Exception
+         */
+        public function runTestB(): int
+        {
+            $sender = new GoogleSend( 'https://www.version2.dk/sitemap.xml' );
+            $sender->send();
+
+            unset($sender);
+            return -1;
+        }
 		
 		/**
 		 * @return int
 		 */
-		public function runTest(): int
+		public function runTestA(): int
 		{
             $this->setGenerator(
                 new SitemapGenerator()
@@ -56,7 +70,7 @@
             {
                 $current = $array[$idx];
                 $this->getGenerator()
-                     ->add( $current );
+                     ->create( $current );
             }
 
             echo "ROW FORMAT ====> \r\n";
@@ -65,7 +79,7 @@
                  ->clear();
 
             $this->getGenerator()
-                 ->addListOfUrls($array);
+                 ->createListOfUrls($array);
 
             print_r(
                 $this->getGenerator()
@@ -77,6 +91,18 @@
             echo "\r\n";
 
             print_r($this->getGenerator()->getBuffer()->length());
+            echo "\r\n";
+
+            $v = $this->getGenerator()->findUrlInSet("https://www.xml-sitemaps.com/forum/index.php/board,8.0.html");
+
+            if( $v )
+            {
+                echo "true\r\n";
+            }
+            else
+            {
+                echo "false \r\n";
+            }
 
 			return 0;
 		}

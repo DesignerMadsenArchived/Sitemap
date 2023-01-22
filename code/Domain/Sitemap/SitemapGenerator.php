@@ -5,29 +5,21 @@
 	namespace IoJaegers\Sitemap\Domain\Sitemap;
 	
 	use IoJaegers\Sitemap\Domain\Sitemap\elements\buffers\SitemapBuffer;
-
     use IoJaegers\Sitemap\Domain\Sitemap\elements\enums\SitemapLogLevel;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\enums\SitemapType;
-
     use IoJaegers\Sitemap\Domain\Sitemap\elements\sorts\SitemapOrder;
 
     use IoJaegers\Sitemap\Domain\Sitemap\io\IOWriter;
-    use IoJaegers\Sitemap\Domain\Sitemap\io\RSSWriter;
-    use IoJaegers\Sitemap\Domain\Sitemap\io\TextWriter;
-    use IoJaegers\Sitemap\Domain\Sitemap\io\XMLWriter;
-
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\Limit;
-    use IoJaegers\Sitemap\Domain\Sitemap\limiter\RSSLimit;
-    use IoJaegers\Sitemap\Domain\Sitemap\limiter\TextLimit;
-    use IoJaegers\Sitemap\Domain\Sitemap\limiter\XMLLimit;
 
     use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
     /**
-	 *
-	 */
+     *
+     */
 	class SitemapGenerator
+        implements SitemapGeneratorInterface
 	{
 		// Constructor
         /**
@@ -59,7 +51,26 @@
             $this->setLogLevel(
                 $logLevel
             );
+
+            $this->generateFactories();
 		}
+
+
+        /**
+         * @return void
+         */
+        private function generateFactories()
+        {
+            $this->setLimitFactory(
+                new SitemapLimitFactory( $this )
+            );
+
+            $this->setWriterFactory(
+                new SitemapWriterFactory( $this )
+            );
+
+            $this->generateInternalStructure();
+        }
 
 
 		// Variables
@@ -72,8 +83,11 @@
         private ?SitemapSetting $settings = null;
         private ?SitemapLogLevel $logLevel = null;
 
-        private ?TextLimit $limit = null;
+        private ?Limit $limit = null;
         private ?IOWriter $writer = null;
+
+        private ?SitemapWriterFactory $writerFactory = null;
+        private ?SitemapLimitFactory $limitFactory = null;
 
 
         // Execution
@@ -81,7 +95,7 @@
          * @param string $url
          * @return bool
          */
-        public final function add( string $url ): bool
+        public final function create( string $url ): bool
         {
             return $this->getBuffer()
                         ->create( $url );
@@ -91,7 +105,7 @@
          * @param array $urls
          * @return int|bool
          */
-        public final function addListOfUrls( array $urls ): int|bool
+        public final function createListOfUrls( array $urls ): int|bool
         {
             return $this->getBuffer()
                         ->createFrom( $urls );
@@ -101,7 +115,24 @@
          * @param string $url
          * @return bool
          */
+        public final function findUrlInSet( string $url ): bool
+        {
+            return $this->getBuffer()->existUrl( $url );
+        }
+
+        /**
+         * @param string $url
+         * @return bool
+         */
         public final function delete( string $url ): bool
+        {
+            return false;
+        }
+
+        /**
+         * @return bool
+         */
+        public final function deleteByPosition(): bool
         {
             return false;
         }
@@ -120,11 +151,25 @@
          * @param string $urlTo
          * @return bool
          */
-        public final function replace( string $urlInSet, string $urlTo ): bool
+        public final function replace( string $urlInSet,
+                                       string $urlTo ): bool
         {
 
             return false;
         }
+
+        /**
+         * @param int $urlInSet
+         * @param string $urlTo
+         * @return bool
+         */
+        public final function replaceByPosition( int $urlInSet,
+                                                 string $urlTo ): bool
+        {
+
+            return false;
+        }
+
 
         //
         /**
@@ -132,134 +177,12 @@
          */
         protected final function generateInternalStructure(): void
         {
-            $this->generateLimit();
-            $this->generateWriter();
+            $this->getLimitFactory()
+                 ->generate();
+
+            $this->getWriterFactory()
+                 ->generate();
         }
-
-        /**
-         * @return void
-         */
-        protected final function generateLimit(): void
-        {
-            if( !is_null( $this->limit ) )
-            {
-                unset( $this->limit );
-            }
-
-            if( $this->getFileType() == SitemapType::TEXT )
-            {
-                $this->setLimit(
-                    $this->generateLimitForText()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::XML )
-            {
-                $this->setLimit(
-                    $this->generateLimitForXML()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::RSS )
-            {
-                $this->setLimit(
-                    $this->generateLimitForRSS()
-                );
-            }
-        }
-
-        /**
-         * @return void
-         */
-        protected final function generateWriter(): void
-        {
-            if( !is_null( $this->writer ) )
-            {
-                unset( $this->limit );
-            }
-
-            if( $this->getFileType() == SitemapType::TEXT )
-            {
-                $this->setWriter(
-                    $this->generateTextWriter()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::XML )
-            {
-                $this->setWriter(
-                    $this->generateXMLWriter()
-                );
-            }
-
-            if( $this->getFileType() == SitemapType::RSS )
-            {
-                $this->setWriter(
-                    $this->generateRSSWriter()
-                );
-            }
-        }
-
-        /**
-         * @return TextLimit
-         */
-        private function generateLimitForText(): TextLimit
-        {
-            return new TextLimit(
-                $this->getBuffer()
-            );
-        }
-
-        /**
-         * @return TextWriter
-         */
-        private function generateTextWriter(): TextWriter
-        {
-            return new TextWriter(
-                $this->getBuffer()
-            );
-        }
-
-        /**
-         * @return RSSLimit
-         */
-        private function generateLimitForRSS(): RSSLimit
-        {
-            return new RSSLimit(
-                $this->getBuffer()
-            );
-        }
-
-        /**
-         * @return RSSWriter
-         */
-        private function generateRSSWriter(): RSSWriter
-        {
-            return new RSSWriter(
-                $this->getBuffer()
-            );
-        }
-
-        /**
-         * @return XMLLimit
-         */
-        private function generateLimitForXML(): XMLLimit
-        {
-            return new XMLLimit(
-                $this->getBuffer()
-            );
-        }
-
-        /**
-         * @return XMLWriter
-         */
-        private function generateXMLWriter(): XMLWriter
-        {
-            return new XMLWriter(
-                $this->getBuffer()
-            );
-        }
-
 
 		// Accessors
 		/**
@@ -308,8 +231,6 @@
 		public final function setFileType( ?SitemapType $fileType ): void
 		{
 			$this->fileType = $fileType;
-
-            $this->generateInternalStructure();
 		}
 
         /**
@@ -345,7 +266,7 @@
         }
 
         /**
-         * @return TextLimit|null
+         * @return Limit|null
          */
         public final function getLimit(): ?Limit
         {
@@ -353,7 +274,8 @@
         }
 
         /**
-         * @param TextLimit|null $limit
+         * @param Limit|null $limit
+         * @return void
          */
         public final function setLimit( ?Limit $limit ): void
         {
@@ -374,6 +296,86 @@
         public final function setWriter( ?IOWriter $writer ): void
         {
             $this->writer = $writer;
+        }
+
+        /**
+         * @return SitemapLimitFactory|null
+         */
+        public final function getLimitFactory(): ?SitemapLimitFactory
+        {
+            return $this->limitFactory;
+        }
+
+        /**
+         * @return SitemapWriterFactory|null
+         */
+        public final function getWriterFactory(): ?SitemapWriterFactory
+        {
+            return $this->writerFactory;
+        }
+
+        /**
+         * @param SitemapLimitFactory|null $limitFactory
+         */
+        public final function setLimitFactory( ?SitemapLimitFactory $limitFactory ): void
+        {
+            $this->limitFactory = $limitFactory;
+        }
+
+        /**
+         * @param SitemapWriterFactory|null $writerFactory
+         */
+        public final function setWriterFactory( ?SitemapWriterFactory $writerFactory ): void
+        {
+            $this->writerFactory = $writerFactory;
+        }
+
+        /**
+         * @return bool
+         */
+        public final function isLimitSet(): bool
+        {
+            return isset( $this->limit );
+        }
+
+        /**
+         * @return void
+         */
+        public final function deleteLimit(): void
+        {
+            unset( $this->limit );
+        }
+
+        /**
+         * @return bool
+         */
+        public final function isLimitNull(): bool
+        {
+            return is_null( $this->limit );
+        }
+
+        /**
+         * @return bool
+         */
+        public final function isWriterSet(): bool
+        {
+            return isset( $this->writer );
+        }
+
+        /**
+         * @return void
+         */
+        public final function deleteWriter(): void
+        {
+            unset( $this->writer );
+        }
+
+        /**
+         * @return bool
+         */
+        public final function isWriterNull(): bool
+        {
+            return is_null( $this->writer );
         }
 	}
 ?>
