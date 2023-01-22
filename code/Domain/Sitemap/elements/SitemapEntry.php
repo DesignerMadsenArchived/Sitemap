@@ -23,7 +23,7 @@
                 return null;
             }
 
-            if( strlen( $url ) == 0 )
+            if( strlen( $url ) == self::zero )
             {
                 return null;
             }
@@ -83,6 +83,12 @@
 		private ?array $url = null;
         private bool $written = false;
 
+        const zero = 0;
+
+        const scheme = 'scheme';
+        const host = 'host';
+        const path = 'path';
+
 
 		// Accessors
         /**
@@ -99,14 +105,7 @@
          */
         protected final function getUrlElement( string $key ): ?string
         {
-            if( isset( $this->getUrl()[ $key ] ) )
-            {
-                return $this->getUrl()[ $key ];
-            }
-            else
-            {
-                return null;
-            }
+            return $this->getUrl()[$key] ?? null;
         }
 
         /**
@@ -114,7 +113,7 @@
          */
         public final function getUrlScheme(): ?string
         {
-            return $this->getUrlElement('scheme');
+            return $this->getUrlElement( self::scheme );
         }
 
         /**
@@ -122,7 +121,7 @@
          */
         public final function getUrlHost(): ?string
         {
-            return $this->getUrlElement('host');
+            return $this->getUrlElement(self::host);
         }
 
         /**
@@ -130,7 +129,7 @@
          */
         public final function getUrlPath(): ?string
         {
-            return $this->getUrlElement('path');
+            return $this->getUrlElement(self::path );
         }
 
         /**

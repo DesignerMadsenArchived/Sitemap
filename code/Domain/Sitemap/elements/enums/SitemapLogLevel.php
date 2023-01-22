@@ -2,7 +2,7 @@
     /**
  *
      */
-    namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+    namespace IoJaegers\Sitemap\Domain\Sitemap\elements\enums;
 
     /**
      *
