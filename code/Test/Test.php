@@ -5,6 +5,7 @@
 	namespace IoJaegers\Sitemap\Test;
 	
 	use IoJaegers\Sitemap\Domain\Sitemap\SitemapGenerator;
+    use IoJaegers\Sitemap\Send\GoogleSend;
 
 
     /**
@@ -23,13 +24,26 @@
 		public static function run(): int
 		{
 			$test = new Test();
-			return $test->runTest();
+			return $test->runTestB();
 		}
+
+        /**
+         * @return int
+         * @throws \Exception
+         */
+        public function runTestB(): int
+        {
+            $sender = new GoogleSend( 'https://www.version2.dk/sitemap.xml' );
+            $sender->send();
+
+            unset($sender);
+            return -1;
+        }
 		
 		/**
 		 * @return int
 		 */
-		public function runTest(): int
+		public function runTestA(): int
 		{
             $this->setGenerator(
                 new SitemapGenerator()
