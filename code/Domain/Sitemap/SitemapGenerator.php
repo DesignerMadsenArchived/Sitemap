@@ -166,8 +166,11 @@
          */
         protected final function generateInternalStructure(): void
         {
-            $this->getLimitFactory()->generate();
-            $this->getWriterFactory()->generate();
+            $this->getLimitFactory()
+                 ->generate();
+
+            $this->getWriterFactory()
+                 ->generate();
         }
 
         /**
@@ -376,6 +379,54 @@
         public function setWriterFactory(?SitemapWriterFactory $writerFactory): void
         {
             $this->writerFactory = $writerFactory;
+        }
+
+        /**
+         * @return bool
+         */
+        public function isLimitSet(): bool
+        {
+            return isset( $this->limit );
+        }
+
+        /**
+         * @return void
+         */
+        public function deleteLimit(): void
+        {
+            unset( $this->limit );
+        }
+
+        /**
+         * @return bool
+         */
+        public function isLimitNull(): bool
+        {
+            return is_null( $this->limit );
+        }
+
+        /**
+         * @return bool
+         */
+        public function isWriterSet(): bool
+        {
+            return isset( $this->writer );
+        }
+
+        /**
+         * @return void
+         */
+        public function deleteWriter(): void
+        {
+            unset( $this->writer );
+        }
+
+        /**
+         * @return bool
+         */
+        public function isWriterNull(): bool
+        {
+            return is_null( $this->writer );
         }
 	}
 ?>
