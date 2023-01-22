@@ -46,7 +46,7 @@
          * @return string
          * @throws \Exception
          */
-        public function fullLink(): string
+        public final function fullLink(): string
         {
             if( is_string( $this->getUrl() ) )
             {
@@ -71,7 +71,7 @@
         /**
          * @return void
          */
-        public function send(): void
+        public final function send(): void
         {
             $message = curl_exec( $this->getCurl() );
 
