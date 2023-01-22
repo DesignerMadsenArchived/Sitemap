@@ -17,6 +17,17 @@
             $this->setBuffer( $buffer );
         }
 
+        /**
+         * @return string
+         */
+        public abstract function write(): string;
+
+        /**
+         * @return string
+         */
+        public abstract function flush(): string;
+
+
         //
         private ?SitemapBuffer $buffer = null;
 

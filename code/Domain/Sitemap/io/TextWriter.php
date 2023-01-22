@@ -18,5 +18,22 @@
              parent::__construct( $buffer );
          }
 
+         /**
+          * @return string
+          */
+         public function write(): string
+         {
+             // TODO: Implement write() method.
+             return "";
+         }
+
+         /**
+          * @return string
+          */
+         public function flush(): string
+         {
+             // TODO: Implement flush() method.
+             return "";
+         }
      }
 ?>
