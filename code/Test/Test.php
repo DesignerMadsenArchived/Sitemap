@@ -56,7 +56,7 @@
             {
                 $current = $array[$idx];
                 $this->getGenerator()
-                     ->add( $current );
+                     ->create( $current );
             }
 
             echo "ROW FORMAT ====> \r\n";
@@ -65,7 +65,7 @@
                  ->clear();
 
             $this->getGenerator()
-                 ->addListOfUrls($array);
+                 ->createListOfUrls($array);
 
             print_r(
                 $this->getGenerator()

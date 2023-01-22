@@ -28,17 +28,18 @@
         /**
          * @return bool
          */
-        public abstract function hitWarning(): bool;
+        public abstract function hasHitWarning(): bool;
 
         /**
          * @return bool
          */
-        public abstract function hitNotice(): bool;
+        public abstract function hasHitNotice(): bool;
 
         /**
          * @return int
          */
-        public abstract function queue(): int;
+        public abstract function queueNewList(): int;
+
 
         // Variable
         private ?SitemapBuffer $buffer = null;

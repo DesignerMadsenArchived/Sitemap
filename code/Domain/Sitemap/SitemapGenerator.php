@@ -28,6 +28,7 @@
 	 *
 	 */
 	class SitemapGenerator
+        implements SitemapGeneratorInterface
 	{
 		// Constructor
         /**
@@ -59,6 +60,14 @@
             $this->setLogLevel(
                 $logLevel
             );
+
+            $this->setLimitFactory(
+                new SitemapLimitFactory( $this )
+            );
+
+            $this->setWriterFactory(
+                new SitemapWriterFactory( $this )
+            );
 		}
 
 
@@ -75,13 +84,16 @@
         private ?TextLimit $limit = null;
         private ?IOWriter $writer = null;
 
+        private ?SitemapWriterFactory $writerFactory = null;
+        private ?SitemapLimitFactory $limitFactory = null;
+
 
         // Execution
         /**
          * @param string $url
          * @return bool
          */
-        public final function add( string $url ): bool
+        public final function create( string $url ): bool
         {
             return $this->getBuffer()
                         ->create( $url );
@@ -91,7 +103,7 @@
          * @param array $urls
          * @return int|bool
          */
-        public final function addListOfUrls( array $urls ): int|bool
+        public final function createListOfUrls( array $urls ): int|bool
         {
             return $this->getBuffer()
                         ->createFrom( $urls );
@@ -102,6 +114,14 @@
          * @return bool
          */
         public final function delete( string $url ): bool
+        {
+            return false;
+        }
+
+        /**
+         * @return bool
+         */
+        public final function deleteByPosition(): bool
         {
             return false;
         }
@@ -120,11 +140,25 @@
          * @param string $urlTo
          * @return bool
          */
-        public final function replace( string $urlInSet, string $urlTo ): bool
+        public final function replace( string $urlInSet,
+                                       string $urlTo ): bool
         {
 
             return false;
         }
+
+        /**
+         * @param int $urlInSet
+         * @param string $urlTo
+         * @return bool
+         */
+        public final function replaceByPosition( int $urlInSet,
+                                                 string $urlTo ): bool
+        {
+
+            return false;
+        }
+
 
         //
         /**
@@ -374,6 +408,38 @@
         public final function setWriter( ?IOWriter $writer ): void
         {
             $this->writer = $writer;
+        }
+
+        /**
+         * @return SitemapLimitFactory|null
+         */
+        public function getLimitFactory(): ?SitemapLimitFactory
+        {
+            return $this->limitFactory;
+        }
+
+        /**
+         * @return SitemapWriterFactory|null
+         */
+        public function getWriterFactory(): ?SitemapWriterFactory
+        {
+            return $this->writerFactory;
+        }
+
+        /**
+         * @param SitemapLimitFactory|null $limitFactory
+         */
+        public function setLimitFactory(?SitemapLimitFactory $limitFactory): void
+        {
+            $this->limitFactory = $limitFactory;
+        }
+
+        /**
+         * @param SitemapWriterFactory|null $writerFactory
+         */
+        public function setWriterFactory(?SitemapWriterFactory $writerFactory): void
+        {
+            $this->writerFactory = $writerFactory;
         }
 	}
 ?>
