@@ -10,10 +10,15 @@
     use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapType;
 
     use IoJaegers\Sitemap\Domain\Sitemap\io\IOWriter;
+    use IoJaegers\Sitemap\Domain\Sitemap\io\RSSWriter;
+    use IoJaegers\Sitemap\Domain\Sitemap\io\TextWriter;
+    use IoJaegers\Sitemap\Domain\Sitemap\io\XMLWriter;
+
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\Limit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\RSSLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\TextLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\XMLLimit;
+
     use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
@@ -52,8 +57,6 @@
             $this->setLogLevel(
                 $logLevel
             );
-
-            $this->generateLimit();
 		}
 
 
@@ -78,7 +81,8 @@
          */
         public final function add( string $url ): bool
         {
-            return $this->getBuffer()->create( $url );
+            return $this->getBuffer()
+                        ->create( $url );
         }
 
         /**
@@ -87,7 +91,8 @@
          */
         public final function addListOfUrls( array $urls ): int|bool
         {
-            return $this->getBuffer()->createFrom( $urls );
+            return $this->getBuffer()
+                        ->createFrom( $urls );
         }
 
         /**
@@ -104,7 +109,8 @@
          */
         public final function clear(): void
         {
-            $this->getBuffer()->clear();
+            $this->getBuffer()
+                 ->clear();
         }
 
         /**
@@ -116,6 +122,15 @@
         {
 
             return false;
+        }
+
+        /**
+         * @return void
+         */
+        protected final function generateInternalStructure(): void
+        {
+            $this->generateLimit();
+            $this->generateWriter();
         }
 
         /**
@@ -151,11 +166,53 @@
         }
 
         /**
+         * @return void
+         */
+        protected final function generateWriter(): void
+        {
+            if( !is_null( $this->writer ) )
+            {
+                unset( $this->limit );
+            }
+
+            if( $this->getFileType() == SitemapType::TEXT )
+            {
+                $this->setWriter(
+                    $this->generateTextWriter()
+                );
+            }
+
+            if( $this->getFileType() == SitemapType::XML )
+            {
+                $this->setWriter(
+                    $this->generateXMLWriter()
+                );
+            }
+
+            if( $this->getFileType() == SitemapType::RSS )
+            {
+                $this->setWriter(
+                    $this->generateRSSWriter()
+                );
+            }
+        }
+
+        /**
          * @return TextLimit
          */
         private function generateLimitForText(): TextLimit
         {
             return new TextLimit(
+                $this->getBuffer()
+            );
+        }
+
+        /**
+         * @return TextWriter
+         */
+        private function generateTextWriter(): TextWriter
+        {
+            return new TextWriter(
                 $this->getBuffer()
             );
         }
@@ -171,11 +228,31 @@
         }
 
         /**
+         * @return RSSWriter
+         */
+        private function generateRSSWriter(): RSSWriter
+        {
+            return new RSSWriter(
+                $this->getBuffer()
+            );
+        }
+
+        /**
          * @return XMLLimit
          */
         private function generateLimitForXML(): XMLLimit
         {
             return new XMLLimit(
+                $this->getBuffer()
+            );
+        }
+
+        /**
+         * @return XMLWriter
+         */
+        private function generateXMLWriter(): XMLWriter
+        {
+            return new XMLWriter(
                 $this->getBuffer()
             );
         }
@@ -229,7 +306,7 @@
 		{
 			$this->fileType = $fileType;
 
-            $this->generateLimit();
+            $this->generateInternalStructure();
 		}
 
         /**
@@ -278,6 +355,22 @@
         public final function setLimit( ?Limit $limit ): void
         {
             $this->limit = $limit;
+        }
+
+        /**
+         * @return IOWriter|null
+         */
+        public final function getWriter(): ?IOWriter
+        {
+            return $this->writer;
+        }
+
+        /**
+         * @param IOWriter|null $writer
+         */
+        public final function setWriter( ?IOWriter $writer ): void
+        {
+            $this->writer = $writer;
         }
 	}
 ?>
