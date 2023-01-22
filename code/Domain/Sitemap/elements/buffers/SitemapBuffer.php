@@ -2,9 +2,10 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+	namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
 
-	use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
+	use IoJaegers\Sitemap\Domain\Sitemap\elements\entries\SitemapEntry;
+    use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
     /**
@@ -13,7 +14,10 @@
 	class SitemapBuffer
 	{
 		// constructors
-		public function __construct( ?SitemapSetting $setting )
+        /**
+         * @param SitemapSetting|null $setting
+         */
+        public function __construct( ?SitemapSetting $setting )
 		{
             $this->setSettings( $setting );
             $this->setEntries( array() );
@@ -22,10 +26,10 @@
                 new SitemapBufferState( $this )
             );
 
-            $this->getState()->calculate();
+            $this->getState()
+                 ->calculate();
 		}
-		
-		
+
 		// Variables
 		private ?array $entries = null;
         private ?SitemapSetting $settings = null;
@@ -36,13 +40,63 @@
 
         // Execute
         /**
+         * @param string $url
          * @return bool
          */
-        public function create(): bool
+        public function create( string $url ): bool
         {
+            $url = SitemapEntry::create( $url );
+
+            if( is_null( $url ) )
+            {
+                return false;
+            }
+
+            $this->appendToBuffer( $url );
+            $this->updateState();
+
+            return true;
+        }
+
+
+        /**
+         * @param array $urls
+         * @return int|bool
+         */
+        public function createFrom( array $urls ): int|bool
+        {
+            $sizeOfArray = count( $urls );
+            $idx = null;
+
+            for( $idx = self::zero;
+                 $idx < $sizeOfArray;
+                 $idx ++ )
+            {
+                $current = $urls[$idx];
+
+                $url = SitemapEntry::create( $current );
+
+                if( is_null( $url ) )
+                {
+                    return $idx;
+                }
+
+                $this->appendToBuffer( $url );
+            }
 
             $this->updateState();
-            return false;
+
+            return true;
+        }
+
+
+        /**
+         * @param SitemapEntry $entry
+         * @return void
+         */
+        protected final function appendToBuffer( SitemapEntry $entry ): void
+        {
+            array_push($this->entries, $entry );
         }
 
         /**
@@ -51,7 +105,8 @@
          */
         public function read( int $urlPosition ): string
         {
-            return "";
+            return $this->getEntryAtIndex( $urlPosition )
+                        ->toString();
         }
 
         /**
@@ -74,6 +129,49 @@
             return false;
         }
 
+        /**
+         * @return void
+         */
+        public function clear(): void
+        {
+            unset( $this->entries );
+            $this->entries = array();
+        }
+
+        /**
+         * @param $url
+         * @return bool
+         */
+        public function existUrl( $url ): bool
+        {
+            $size = $this->getState()->getSizeOfBuffer()->getValue();
+            $index = null;
+            $result = false;
+
+            for( $index = self::zero;
+                 $index< $size;
+                 $index++ )
+            {
+                $entry = $this->getEntryAtIndex( $index );
+                $url_parsed = parse_url( $url );
+
+                if( $url_parsed[ 'path' ] == $entry->getUrlPath() )
+                {
+                    $result = true;
+                }
+            }
+
+            return $result;
+        }
+
+        /**
+         * @param int $index
+         * @return SitemapEntry
+         */
+        public function getEntryAtIndex( int $index ): SitemapEntry
+        {
+            return $this->getEntries()[$index];
+        }
 
         /**
          * @return int
@@ -81,7 +179,8 @@
         public function length(): int
         {
             return $this->getState()
-                        ->getSizeOfBuffer();
+                        ->getSizeOfBuffer()
+                        ->getValue();
         }
 
         /**
@@ -91,6 +190,7 @@
         {
             $this->getState()
                  ->calculate();
+
             return false;
         }
 

@@ -2,14 +2,19 @@
 	/**
 	 *
 	 */
-    namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+    namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
 
-	/**
+	use IoJaegers\Sitemap\Domain\TBM\IntegerCounter;
+
+    /**
 	 * 
 	 */
 	class SitemapBufferState
 	{
 		// Constructor
+        /**
+         * @param SitemapBuffer $buffer
+         */
 		public function __construct( SitemapBuffer $buffer )
 		{
             $this->setBuffer(
@@ -17,7 +22,8 @@
             );
 
             $this->setSizeOfBuffer(
-                self::zero
+                new IntegerCounter( value:
+                             self::zero )
             );
 		}
 
@@ -26,15 +32,28 @@
          */
         public function calculate(): void
         {
-
+            if( $this->isBufferSet() )
+            {
+                $this->getSizeOfBuffer()
+                     ->setValue(
+                    count( $this->getBuffer()
+                                ->getEntries()
+                    )
+                );
+            }
         }
 
 		// Variables
         private SitemapBuffer $buffer;
-        private int $sizeOfBuffer;
+        private IntegerCounter $sizeOfBuffer;
 
         const zero = 0;
 
+
+        public function isBufferSet(): bool
+        {
+            return isset($this->buffer);
+        }
 
         /**
          * @return SitemapBuffer
@@ -53,17 +72,18 @@
         }
 
         /**
-         * @return int
+         * @return IntegerCounter
          */
-        public function getSizeOfBuffer(): int
+        public function getSizeOfBuffer(): IntegerCounter
         {
             return $this->sizeOfBuffer;
         }
 
         /**
-         * @param int $sizeOfBuffer
+         * @param IntegerCounter $sizeOfBuffer
+         * @return void
          */
-        public function setSizeOfBuffer( int $sizeOfBuffer ): void
+        public function setSizeOfBuffer(IntegerCounter $sizeOfBuffer ): void
         {
             $this->sizeOfBuffer = $sizeOfBuffer;
         }

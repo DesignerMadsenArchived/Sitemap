@@ -2,7 +2,7 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+	namespace IoJaegers\Sitemap\Domain\Sitemap\elements\sorts;
 		
 	use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
@@ -13,6 +13,9 @@
 	class SitemapOrder
 	{
         // Constructor
+        /**
+         * @param SitemapSetting|null $setting
+         */
 		public function __construct( ?SitemapSetting $setting )
 		{
             $this->setSettings( $setting );
