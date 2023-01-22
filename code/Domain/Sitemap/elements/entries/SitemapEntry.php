@@ -2,7 +2,7 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+	namespace IoJaegers\Sitemap\Domain\Sitemap\elements\entries;
 
 
 	/**
@@ -48,13 +48,16 @@
          */
         public function toString(): string
         {
-            return $this->getUrlScheme() .
-                   "://"                 .
-                   $this->getUrlHost()   .
+            return $this->getUrlScheme()    .
+                   self::protocolSeparator  .
+                   $this->getUrlHost()      .
                    $this->getUrlPath();
         }
 
-        public function isValid()
+        /**
+         * @return bool
+         */
+        public final function isValid(): bool
         {
             $retVal = true;
 
@@ -86,8 +89,10 @@
         const zero = 0;
 
         const scheme = 'scheme';
-        const host = 'host';
-        const path = 'path';
+        const host   = 'host';
+        const path   = 'path';
+
+        const protocolSeparator = '://';
 
 
 		// Accessors
@@ -121,7 +126,7 @@
          */
         public final function getUrlHost(): ?string
         {
-            return $this->getUrlElement(self::host);
+            return $this->getUrlElement(self::host );
         }
 
         /**
@@ -143,7 +148,7 @@
         /**
          * @return bool
          */
-        public function isWritten(): bool
+        public final function isWritten(): bool
         {
             return $this->written;
         }
@@ -151,7 +156,7 @@
         /**
          * @param bool $written
          */
-        public function setWritten( bool $written ): void
+        public final function setWritten( bool $written ): void
         {
             $this->written = $written;
         }

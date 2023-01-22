@@ -1,7 +1,7 @@
 <?php
     namespace IoJaegers\Sitemap\Domain\Sitemap\io;
 
-    use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapBuffer;
+    use IoJaegers\Sitemap\Domain\Sitemap\elements\buffers\SitemapBuffer;
 
 
     /**

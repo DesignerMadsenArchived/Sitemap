@@ -2,7 +2,7 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+	namespace IoJaegers\Sitemap\Domain\Sitemap\elements\sorts;
 		
 	use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 

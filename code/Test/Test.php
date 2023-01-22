@@ -76,6 +76,8 @@
             echo "END ===>";
             echo "\r\n";
 
+            print_r($this->getGenerator()->getBuffer()->length());
+
 			return 0;
 		}
 

@@ -2,9 +2,11 @@
 	/**
 	 *
 	 */
-    namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+    namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
 
-	/**
+	use IoJaegers\Sitemap\Domain\TBM\Counter;
+
+    /**
 	 * 
 	 */
 	class SitemapBufferState

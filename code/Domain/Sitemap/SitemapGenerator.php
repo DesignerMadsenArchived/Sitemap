@@ -4,18 +4,23 @@
 	 */
 	namespace IoJaegers\Sitemap\Domain\Sitemap;
 	
-	use IoJaegers\Sitemap\Domain\Sitemap\elements\enums\SitemapLogLevel;
+	use IoJaegers\Sitemap\Domain\Sitemap\elements\buffers\SitemapBuffer;
+
+    use IoJaegers\Sitemap\Domain\Sitemap\elements\enums\SitemapLogLevel;
     use IoJaegers\Sitemap\Domain\Sitemap\elements\enums\SitemapType;
-    use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapBuffer;
-    use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapOrder;
+
+    use IoJaegers\Sitemap\Domain\Sitemap\elements\sorts\SitemapOrder;
+
     use IoJaegers\Sitemap\Domain\Sitemap\io\IOWriter;
     use IoJaegers\Sitemap\Domain\Sitemap\io\RSSWriter;
     use IoJaegers\Sitemap\Domain\Sitemap\io\TextWriter;
     use IoJaegers\Sitemap\Domain\Sitemap\io\XMLWriter;
+
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\Limit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\RSSLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\TextLimit;
     use IoJaegers\Sitemap\Domain\Sitemap\limiter\XMLLimit;
+
     use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
@@ -121,6 +126,7 @@
             return false;
         }
 
+        //
         /**
          * @return void
          */

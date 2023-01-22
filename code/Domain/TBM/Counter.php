@@ -2,7 +2,7 @@
     /**
      *
      */
-    namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+    namespace IoJaegers\Sitemap\Domain\TBM;
 
 
     /**
@@ -13,13 +13,16 @@
         /**
          * @param int $value
          */
-        public function __construct( int $value = 0 )
+        public function __construct( int $value = self::zero )
         {
             $this->setValue( $value );
         }
 
         // Variable
         private int $value = 0;
+
+        const one = 1;
+        const zero = 0;
 
         // Accessor
         /**
@@ -43,7 +46,7 @@
          */
         public function increment(): void
         {
-            $this->increase( 1 );
+            $this->increase( self::one );
         }
 
         /**
@@ -60,7 +63,7 @@
          */
         public function decrement(): void
         {
-            $this->decrease( 1 );
+            $this->decrease( self::one );
         }
 
         /**

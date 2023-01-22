@@ -4,7 +4,7 @@
      */
     namespace IoJaegers\Sitemap\Domain\Sitemap\limiter;
 
-    use IoJaegers\Sitemap\Domain\Sitemap\elements\SitemapBuffer;
+    use IoJaegers\Sitemap\Domain\Sitemap\elements\buffers\SitemapBuffer;
 
 
     /**

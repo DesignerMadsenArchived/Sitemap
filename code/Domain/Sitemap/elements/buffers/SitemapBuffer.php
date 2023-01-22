@@ -2,9 +2,10 @@
 	/**
 	 *
 	 */
-	namespace IoJaegers\Sitemap\Domain\Sitemap\elements;
+	namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
 
-	use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
+	use IoJaegers\Sitemap\Domain\Sitemap\elements\entries\SitemapEntry;
+    use IoJaegers\Sitemap\Domain\Sitemap\settings\SitemapSetting;
 
 
     /**
@@ -51,9 +52,7 @@
                 return false;
             }
 
-            array_push( $this->entries,
-                             $url );
-
+            $this->appendToBuffer( $url );
             $this->updateState();
             return true;
         }
@@ -66,7 +65,7 @@
         public function createFrom( array $urls ): int|bool
         {
             $sizeOfArray = count( $urls );
-            $idx = self::zero;
+            $idx = null;
 
             for( $idx = self::zero;
                  $idx < $sizeOfArray;
@@ -81,13 +80,23 @@
                     return $idx;
                 }
 
-                array_push( $this->entries,
-                                  $url );
+                $this->appendToBuffer( $url );
             }
 
             $this->updateState();
 
             return true;
+        }
+
+
+        /**
+         * @param SitemapEntry $entry
+         * @return void
+         */
+        protected final function appendToBuffer( SitemapEntry $entry ): void
+        {
+            array_push($this->entries,
+                             $entry );
         }
 
         /**
@@ -124,7 +133,7 @@
          */
         public function clear(): void
         {
-            unset($this->entries);
+            unset( $this->entries );
             $this->entries = array();
         }
 
@@ -135,7 +144,8 @@
         public function length(): int
         {
             return $this->getState()
-                        ->getSizeOfBuffer();
+                        ->getSizeOfBuffer()
+                        ->getValue();
         }
 
         /**
