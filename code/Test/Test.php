@@ -77,6 +77,18 @@
             echo "\r\n";
 
             print_r($this->getGenerator()->getBuffer()->length());
+            echo "\r\n";
+
+            $v = $this->getGenerator()->findUrlInSet("https://www.xml-sitemaps.com/forum/index.php/board,8.0.html");
+
+            if( $v )
+            {
+                echo "true\r\n";
+            }
+            else
+            {
+                echo "false \r\n";
+            }
 
 			return 0;
 		}

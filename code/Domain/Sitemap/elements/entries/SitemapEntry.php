@@ -14,33 +14,33 @@
          * @param string $url
          * @return SitemapEntry|null
          */
-        public static function create( string $url ): ?SitemapEntry
+        public final static function create( string $url ): ?SitemapEntry
         {
             $url_parsed = parse_url( $url );
 
-            if( $url_parsed === false )
+            if( $url_parsed === false ||
+                strlen( $url ) == self::zero )
             {
                 return null;
             }
 
-            if( strlen( $url ) == self::zero )
-            {
-                return null;
-            }
-
-            $entry = new SitemapEntry();
-            $entry->setUrl( $url_parsed );
-
-            return $entry;
+            return new SitemapEntry( url: $url,
+                                     parsed: $url_parsed );
         }
 
 		// Constructor
         /**
          *
          */
-		public function __construct()
+		public function __construct( string $url,
+                                     ?array $parsed = null )
 		{
+            $this->setOriginal( $url );
+            $this->setParsed( $parsed );
 
+            $this->setLength(
+                strlen( $url )
+            );
 		}
 
         /**
@@ -59,32 +59,21 @@
          */
         public final function isValid(): bool
         {
-            $retVal = true;
-
-            if( is_null( $this->getUrlScheme() ) )
+            if( $this->isSchemeNull() ||
+                $this->isHostNull() )
             {
-                $retVal = true;
-                return $retVal;
+                return false;
             }
 
-            if( is_null( $this->getUrlHost()  ) )
-            {
-                $retVal = true;
-                return $retVal;
-            }
-
-            if( is_null( $this->getUrlPath() ) )
-            {
-                $retVal = true;
-                return $retVal;
-            }
-
-            return $retVal;
+            return true;
         }
 
         // Variables
-		private ?array $url = null;
+        private ?string $original = null;
+		private ?array $parsed = null;
+
         private bool $written = false;
+        private ?int $length = null;
 
         const zero = 0;
 
@@ -94,14 +83,37 @@
 
         const protocolSeparator = '://';
 
+        /**
+         * @return bool
+         */
+        public final function isSchemeNull(): bool
+        {
+            return is_null( $this->getUrlScheme() );
+        }
+
+        /**
+         * @return bool
+         */
+        public final function isHostNull(): bool
+        {
+            return is_null( $this->getUrlHost() );
+        }
+
+        /**
+         * @return bool
+         */
+        public final function isPathNull(): bool
+        {
+            return is_null( $this->getUrlPath() );
+        }
 
 		// Accessors
         /**
          * @return array|null
          */
-        public final function getUrl(): ?array
+        public final function getParsed(): ?array
         {
-            return $this->url;
+            return $this->parsed;
         }
 
         /**
@@ -110,7 +122,7 @@
          */
         protected final function getUrlElement( string $key ): ?string
         {
-            return $this->getUrl()[$key] ?? null;
+            return $this->getParsed()[ $key ] ?? null;
         }
 
         /**
@@ -126,7 +138,7 @@
          */
         public final function getUrlHost(): ?string
         {
-            return $this->getUrlElement(self::host );
+            return $this->getUrlElement( self::host );
         }
 
         /**
@@ -134,15 +146,15 @@
          */
         public final function getUrlPath(): ?string
         {
-            return $this->getUrlElement(self::path );
+            return $this->getUrlElement( self::path );
         }
 
         /**
-         * @param array|null $url
+         * @param array|null $parsed
          */
-        public final function setUrl( ?array $url ): void
+        protected final function setParsed( ?array $parsed ): void
         {
-            $this->url = $url;
+            $this->parsed = $parsed;
         }
 
         /**
@@ -160,5 +172,39 @@
         {
             $this->written = $written;
         }
+
+        /**
+         * @return string|null
+         */
+        public final function getOriginal(): ?string
+        {
+            return $this->original;
+        }
+
+        /**
+         * @param string|null $original
+         */
+        public final function setOriginal( ?string $original ): void
+        {
+            $this->original = $original;
+        }
+
+        /**
+         * @return int
+         */
+        public function getLength(): int
+        {
+            return $this->length;
+        }
+
+        /**
+         * @param int $length
+         * @return void
+         */
+        public function setLength( int $length ): void
+        {
+            $this->length = $length;
+        }
+
 	}
 ?>

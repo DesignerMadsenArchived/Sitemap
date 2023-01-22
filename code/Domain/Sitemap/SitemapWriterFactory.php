@@ -36,7 +36,6 @@
 
             switch ( $this->getGenerator()->getFileType() )
             {
-
                 case SitemapType::TEXT:
                         $this->generateAsText();
                     break;
