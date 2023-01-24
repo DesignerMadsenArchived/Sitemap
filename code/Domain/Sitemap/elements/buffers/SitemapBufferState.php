@@ -3,7 +3,9 @@
 	 *
 	 */
     namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
-
+	
+	use IOJaegers\Hrbf\Math\Counters\IntegerCounter;
+	
 	
 	/**
 	 *
@@ -23,8 +25,7 @@
             );
 
             $this->setSizeOfBuffer(
-                new IntegerCounter( value:
-                             self::zero )
+                new IntegerCounter( value: self::zero )
             );
 		}
 
@@ -37,8 +38,8 @@
             {
                 $this->getSizeOfBuffer()
                      ->setValue(
-                    count( $this->getBuffer()
-                                ->getEntries()
+						count( $this->getBuffer()
+									->getEntries()
                     )
                 );
             }
@@ -49,10 +50,14 @@
 		
         private IntegerCounter $sizeOfBuffer;
 
+			// Constant
         const zero = 0;
 
 
 		// Is states
+		/**
+		 * @return bool
+		 */
         public function isBufferSet(): bool
         {
             return isset( $this->buffer );

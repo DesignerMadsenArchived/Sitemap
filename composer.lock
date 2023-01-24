@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/IO-Jaegers/FileSystem.git",
-                "reference": "dae7440b51aaabe9724cfc0c1c7f624e73c03ea7"
+                "reference": "d05b1043a71b74a888d0be6f10f8d90c7ff809d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IO-Jaegers/FileSystem/zipball/dae7440b51aaabe9724cfc0c1c7f624e73c03ea7",
-                "reference": "dae7440b51aaabe9724cfc0c1c7f624e73c03ea7",
+                "url": "https://api.github.com/repos/IO-Jaegers/FileSystem/zipball/d05b1043a71b74a888d0be6f10f8d90c7ff809d3",
+                "reference": "d05b1043a71b74a888d0be6f10f8d90c7ff809d3",
                 "shasum": ""
             },
             "default-branch": true,
@@ -39,9 +39,9 @@
             ],
             "support": {
                 "issues": "https://github.com/IO-Jaegers/FileSystem/issues",
-                "source": "https://github.com/IO-Jaegers/FileSystem/tree/development"
+                "source": "https://github.com/IO-Jaegers/FileSystem/tree/main"
             },
-            "time": "2023-01-21T10:51:18+00:00"
+            "time": "2023-01-23T08:06:17+00:00"
         },
         {
             "name": "io-jaegers/hrbf",
@@ -49,12 +49,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/IO-Jaegers/HRBF.git",
-                "reference": "8c193acda0a3402b65e69e8a0c14883688feb9dc"
+                "reference": "7c5211ba4fb093735f1900c7f7356123147a2c3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IO-Jaegers/HRBF/zipball/8c193acda0a3402b65e69e8a0c14883688feb9dc",
-                "reference": "8c193acda0a3402b65e69e8a0c14883688feb9dc",
+                "url": "https://api.github.com/repos/IO-Jaegers/HRBF/zipball/7c5211ba4fb093735f1900c7f7356123147a2c3c",
+                "reference": "7c5211ba4fb093735f1900c7f7356123147a2c3c",
                 "shasum": ""
             },
             "default-branch": true,
@@ -79,7 +79,7 @@
                 "issues": "https://github.com/IO-Jaegers/HRBF/issues",
                 "source": "https://github.com/IO-Jaegers/HRBF/tree/main"
             },
-            "time": "2023-01-17T09:39:22+00:00"
+            "time": "2023-01-24T14:16:05+00:00"
         },
         {
             "name": "io-jaegers/webformat-kit",
@@ -87,12 +87,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/IO-Jaegers/WebFormatKit.git",
-                "reference": "e49ec541fa74739cd022d88881e139109cdc9670"
+                "reference": "397a0d67c6ce9f4c2b0f74d7c7cfef28155157f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IO-Jaegers/WebFormatKit/zipball/e49ec541fa74739cd022d88881e139109cdc9670",
-                "reference": "e49ec541fa74739cd022d88881e139109cdc9670",
+                "url": "https://api.github.com/repos/IO-Jaegers/WebFormatKit/zipball/397a0d67c6ce9f4c2b0f74d7c7cfef28155157f6",
+                "reference": "397a0d67c6ce9f4c2b0f74d7c7cfef28155157f6",
                 "shasum": ""
             },
             "default-branch": true,
@@ -114,9 +114,9 @@
             ],
             "support": {
                 "issues": "https://github.com/IO-Jaegers/WebFormatKit/issues",
-                "source": "https://github.com/IO-Jaegers/WebFormatKit/tree/development"
+                "source": "https://github.com/IO-Jaegers/WebFormatKit/tree/main"
             },
-            "time": "2023-01-20T13:33:00+00:00"
+            "time": "2023-01-23T08:12:23+00:00"
         }
     ],
     "packages-dev": [
@@ -433,12 +433,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "377724361a657c79887777562440ccf993745af1"
+                "reference": "08b2022df9708328731f1e9094e81d720739acf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/377724361a657c79887777562440ccf993745af1",
-                "reference": "377724361a657c79887777562440ccf993745af1",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/08b2022df9708328731f1e9094e81d720739acf8",
+                "reference": "08b2022df9708328731f1e9094e81d720739acf8",
                 "shasum": ""
             },
             "require": {
@@ -502,7 +502,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-15T14:06:17+00:00"
+            "time": "2023-01-24T14:18:22+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -751,12 +751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9f9062f50deb249ff1689f9b86741007bcb2a97a"
+                "reference": "aa658d693d68e23604fcd3504b6e5efd59d341ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9f9062f50deb249ff1689f9b86741007bcb2a97a",
-                "reference": "9f9062f50deb249ff1689f9b86741007bcb2a97a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/aa658d693d68e23604fcd3504b6e5efd59d341ab",
+                "reference": "aa658d693d68e23604fcd3504b6e5efd59d341ab",
                 "shasum": ""
             },
             "require": {
@@ -845,7 +845,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-14T12:50:36+00:00"
+            "time": "2023-01-24T14:15:16+00:00"
         },
         {
             "name": "sebastian/cli-parser",
