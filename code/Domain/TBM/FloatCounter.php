@@ -8,41 +8,42 @@
     /**
      *
      */
-    class IntegerCounter
+    class FloatCounter
         implements Counter
     {
-        /**
-         * @param int $value
-         */
+		/**
+		 * @param float $value
+		 */
         public function __construct(
-			int $value = self::zero
+			float $value = self::zero
 		)
         {
             $this->setValue( $value );
         }
 
         // Variable
-        private int $value = 0;
+        private float $value = 0;
 
 			// constants
-        const one = 1;
+        const one = 1.0;
 		
-        const zero = 0;
+        const zero = 0.0;
 
 		
         // Accessor
-        /**
-         * @return int
-         */
-        public final function getValue(): int
+		/**
+		 * @return float
+		 */
+        public final function getValue(): float
         {
             return $this->value;
         }
-
-        /**
-         * @param int $value
-         */
-        public final function setValue( int $value ): void
+	
+		/**
+		 * @param float $value
+		 * @return void
+		 */
+        public final function setValue( float $value ): void
         {
             $this->value = $value;
         }
@@ -54,12 +55,12 @@
         {
             $this->increase( self::one );
         }
-
-        /**
-         * @param int $value
-         * @return void
-         */
-        public final function increase( int $value ): void
+	
+		/**
+		 * @param float $value
+		 * @return void
+		 */
+        public final function increase( float $value ): void
         {
             $this->setValue( $this->getValue() + $value );
         }
@@ -71,14 +72,14 @@
         {
             $this->decrease( self::one );
         }
-
-        /**
-         * @param int $withValue
-         * @return void
-         */
-        public final function decrease( int $withValue ): void
+	
+		/**
+		 * @param float $withValue
+		 * @return void
+		 */
+        public final function decrease( float $withValue ): void
         {
-            $this->setValue($this->getValue() - $withValue);
+            $this->setValue($this->getValue() - $withValue );
         }
     }
 ?>

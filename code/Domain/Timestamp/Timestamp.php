@@ -18,7 +18,7 @@
 		/**
 		 * @return TimestampType|null
 		 */
-		public function getType(): ?TimestampType
+		public final function getType(): ?TimestampType
 		{
 			return $this->type;
 		}
@@ -26,7 +26,7 @@
 		/**
 		 * @param TimestampType|null $type
 		 */
-		public function setType( ?TimestampType $type ): void
+		public final function setType( ?TimestampType $type ): void
 		{
 			$this->type = $type;
 		}

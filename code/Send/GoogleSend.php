@@ -12,12 +12,18 @@
         extends PingService
     {
         /**
-         * @param string $url
+         * @param string|null $url
          * @throws \Exception
          */
-        public function __construct( string $url )
+        public function __construct( ?string $url=null )
         {
             parent::__construct();
+
+            if( is_null( $url ) )
+            {
+                $url = gethostname();
+            }
+
             $this->setUrl( $url );
         }
 
