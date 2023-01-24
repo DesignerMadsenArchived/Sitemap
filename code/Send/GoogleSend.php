@@ -15,7 +15,9 @@
          * @param string|null $url
          * @throws \Exception
          */
-        public function __construct( ?string $url=null )
+        public function __construct(
+			?string $url = null
+		)
         {
             parent::__construct();
 
@@ -70,10 +72,20 @@
          */
         protected final function options(): void
         {
-            curl_setopt( $this->getCurl(), CURLOPT_URL, $this->fullLink() );
-            curl_setopt( $this->getCurl(), CURLOPT_RETURNTRANSFER, 1 );
+            curl_setopt(
+				$this->getCurl(),
+				CURLOPT_URL,
+				$this->fullLink()
+			);
+			
+            curl_setopt(
+				$this->getCurl(),
+				CURLOPT_RETURNTRANSFER,
+				1
+			);
         }
 
+		
         /**
          * @return void
          */
@@ -81,7 +93,10 @@
         {
             $message = curl_exec( $this->getCurl() );
 
-            $info = curl_getinfo( $this->getCurl(), CURLINFO_RESPONSE_CODE );
+            $info = curl_getinfo(
+				$this->getCurl(),
+				CURLINFO_RESPONSE_CODE
+			);
 
             if( $info == HTTPResponseTable::RESPONSE_SUCCESSFUL )
             {

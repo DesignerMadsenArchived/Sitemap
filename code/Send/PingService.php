@@ -82,6 +82,7 @@
 
             // States
         private bool $successful = false;
+		
         private ?string $response = null;
 
 
@@ -89,7 +90,9 @@
         /**
          * @param string|null $url
          */
-        public final function setUrl( ?string $url ): void
+        public final function setUrl(
+			?string $url
+		): void
         {
             $this->url = $url;
         }
@@ -97,7 +100,9 @@
         /**
          * @param CurlHandle|null $Curl
          */
-        public final function setCurl( ?CurlHandle $Curl ): void
+        public final function setCurl(
+			?CurlHandle $Curl
+		): void
         {
             $this->Curl = $Curl;
         }
@@ -148,7 +153,9 @@
         /**
          * @param bool $successful
          */
-        public final function setSuccessful( bool $successful ): void
+        public final function setSuccessful(
+			bool $successful
+		): void
         {
             $this->successful = $successful;
         }
@@ -165,7 +172,9 @@
          * @param bool $isDebugging
          * @return void
          */
-        public final function setIsDebugging( bool $isDebugging ): void
+        public final function setIsDebugging(
+			bool $isDebugging
+		): void
         {
             $this->isDebugging = $isDebugging;
         }
@@ -181,7 +190,9 @@
         /**
          * @param string|null $response
          */
-        public final function setResponse( ?string $response ): void
+        public final function setResponse(
+			?string $response
+		): void
         {
             $this->response = $response;
         }
