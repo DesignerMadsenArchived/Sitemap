@@ -17,7 +17,9 @@
         /**
          * @param SitemapSetting|null $setting
          */
-        public function __construct( ?SitemapSetting $setting )
+        public function __construct(
+			?SitemapSetting $setting
+		)
 		{
             $this->setSettings( $setting );
             $this->setEntries( array() );
@@ -43,7 +45,9 @@
          * @param string $url
          * @return bool
          */
-        public function create( string $url ): bool
+        public function create(
+			string $url
+		): bool
         {
             $url = SitemapEntry::create( $url );
 
@@ -63,7 +67,9 @@
          * @param array $urls
          * @return int|bool
          */
-        public function createFrom( array $urls ): int|bool
+        public function createFrom(
+			array $urls
+		): int|bool
         {
             $sizeOfArray = count( $urls );
             $idx = null;
@@ -94,7 +100,9 @@
          * @param SitemapEntry $entry
          * @return void
          */
-        protected final function appendToBuffer( SitemapEntry $entry ): void
+        protected final function appendToBuffer(
+			SitemapEntry $entry
+		): void
         {
             array_push($this->entries, $entry );
         }
@@ -103,7 +111,9 @@
          * @param int $urlPosition
          * @return string
          */
-        public function read( int $urlPosition ): string
+        public function read(
+			int $urlPosition
+		): string
         {
             return $this->getEntryAtIndex( $urlPosition )
                         ->toString();
@@ -142,7 +152,9 @@
          * @param $url
          * @return bool
          */
-        public function existUrl( $url ): bool
+        public function existUrl(
+			$url
+		): bool
         {
             $size = $this->getState()->getSizeOfBuffer()->getValue();
             $index = null;
@@ -168,7 +180,9 @@
          * @param int $index
          * @return SitemapEntry
          */
-        public function getEntryAtIndex( int $index ): SitemapEntry
+        public function getEntryAtIndex(
+			int $index
+		): SitemapEntry
         {
             return $this->getEntries()[$index];
         }
@@ -235,7 +249,9 @@
         /**
          * @param SitemapSetting|null $settings
          */
-        public function setSettings( ?SitemapSetting $settings ): void
+        public function setSettings(
+			?SitemapSetting $settings
+		): void
         {
             $this->settings = $settings;
         }
@@ -267,7 +283,9 @@
         /**
          * @param SitemapBufferState|null $state
          */
-        public function setState( ?SitemapBufferState $state ): void
+        public function setState(
+			?SitemapBufferState $state
+		): void
         {
             $this->state = $state;
         }

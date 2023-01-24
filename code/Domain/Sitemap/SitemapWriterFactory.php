@@ -19,7 +19,9 @@
         /**
          * @param SitemapGenerator $generator
          */
-        public function __construct( SitemapGenerator $generator )
+        public function __construct(
+			SitemapGenerator $generator
+		)
         {
             $this->setGenerator( $generator );
         }
@@ -61,7 +63,9 @@
         /**
          * @param SitemapGenerator|null $generator
          */
-        public final function setGenerator( ?SitemapGenerator $generator ): void
+        public final function setGenerator(
+			?SitemapGenerator $generator
+		): void
         {
             $this->generator = $generator;
         }

@@ -7,14 +7,14 @@
     use IoJaegers\Sitemap\Domain\Sitemap\elements\buffers\SitemapBuffer;
 
 
-    /**
-     *
-     */
+	/**
+	 *
+	 */
     abstract class Limit
     {
-        /**
-         *
-         */
+		/**
+		 * @param SitemapBuffer|null $buffer
+		 */
         public function __construct( ?SitemapBuffer $buffer )
         {
             $this->setBuffer( $buffer );
@@ -40,15 +40,17 @@
          */
         public abstract function queueNewList(): int;
 
-
         // Variable
         private ?SitemapBuffer $buffer = null;
 
+		
         // Accessor
         /**
          * @param SitemapBuffer|null $buffer
          */
-        public final function setBuffer( ?SitemapBuffer $buffer ): void
+        public final function setBuffer(
+			?SitemapBuffer $buffer
+		): void
         {
             $this->buffer = $buffer;
         }

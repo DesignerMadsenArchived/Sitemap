@@ -16,7 +16,9 @@
         /**
          * @param SitemapBuffer|null $buffer
          */
-        public final function __construct( ?SitemapBuffer $buffer )
+        public final function __construct(
+			?SitemapBuffer $buffer
+		)
         {
             parent::__construct( $buffer );
 

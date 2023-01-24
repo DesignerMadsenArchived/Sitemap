@@ -4,10 +4,9 @@
 	 */
     namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
 
-	use IoJaegers\Sitemap\Domain\TBM\IntegerCounter;
-
-    /**
-	 * 
+	
+	/**
+	 *
 	 */
 	class SitemapBufferState
 	{
@@ -15,7 +14,9 @@
         /**
          * @param SitemapBuffer $buffer
          */
-		public function __construct( SitemapBuffer $buffer )
+		public function __construct(
+			SitemapBuffer $buffer
+		)
 		{
             $this->setBuffer(
                 $buffer
@@ -45,16 +46,19 @@
 
 		// Variables
         private SitemapBuffer $buffer;
+		
         private IntegerCounter $sizeOfBuffer;
 
         const zero = 0;
 
 
+		// Is states
         public function isBufferSet(): bool
         {
-            return isset($this->buffer);
+            return isset( $this->buffer );
         }
 
+		// Accessors
         /**
          * @return SitemapBuffer
          */
@@ -66,7 +70,9 @@
         /**
          * @param SitemapBuffer $buffer
          */
-        public final function setBuffer( SitemapBuffer $buffer ): void
+        public final function setBuffer(
+			SitemapBuffer $buffer
+		): void
         {
             $this->buffer = $buffer;
         }
@@ -83,7 +89,9 @@
          * @param IntegerCounter $sizeOfBuffer
          * @return void
          */
-        public function setSizeOfBuffer(IntegerCounter $sizeOfBuffer ): void
+        public function setSizeOfBuffer(
+			IntegerCounter $sizeOfBuffer
+		): void
         {
             $this->sizeOfBuffer = $sizeOfBuffer;
         }

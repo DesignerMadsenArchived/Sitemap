@@ -87,6 +87,7 @@
         private ?IOWriter $writer = null;
 
         private ?SitemapWriterFactory $writerFactory = null;
+		
         private ?SitemapLimitFactory $limitFactory = null;
 
 
@@ -95,7 +96,9 @@
          * @param string $url
          * @return bool
          */
-        public final function create( string $url ): bool
+        public final function create(
+			string $url
+		): bool
         {
             return $this->getBuffer()
                         ->create( $url );
@@ -105,7 +108,9 @@
          * @param array $urls
          * @return int|bool
          */
-        public final function createListOfUrls( array $urls ): int|bool
+        public final function createListOfUrls(
+			array $urls
+		): int|bool
         {
             return $this->getBuffer()
                         ->createFrom( $urls );
@@ -115,7 +120,9 @@
          * @param string $url
          * @return bool
          */
-        public final function findUrlInSet( string $url ): bool
+        public final function findUrlInSet(
+			string $url
+		): bool
         {
             return $this->getBuffer()->existUrl( $url );
         }
@@ -124,7 +131,9 @@
          * @param string $url
          * @return bool
          */
-        public final function delete( string $url ): bool
+        public final function delete(
+			string $url
+		): bool
         {
             return false;
         }
@@ -151,8 +160,10 @@
          * @param string $urlTo
          * @return bool
          */
-        public final function replace( string $urlInSet,
-                                       string $urlTo ): bool
+        public final function replace(
+			string $urlInSet,
+			string $urlTo
+		): bool
         {
 
             return false;
@@ -163,8 +174,10 @@
          * @param string $urlTo
          * @return bool
          */
-        public final function replaceByPosition( int $urlInSet,
-                                                 string $urlTo ): bool
+        public final function replaceByPosition(
+			int $urlInSet,
+            string $urlTo
+		): bool
         {
 
             return false;
@@ -196,7 +209,9 @@
 		/**
 		 * @param SitemapBuffer|null $buffer
 		 */
-		public final function setBuffer( ?SitemapBuffer $buffer ): void
+		public final function setBuffer(
+			?SitemapBuffer $buffer
+		): void
 		{
 			$this->buffer = $buffer;
 		}
@@ -212,7 +227,9 @@
 		/**
 		 * @param SitemapOrder|null $order
 		 */
-		public final function setOrder( ?SitemapOrder $order ): void
+		public final function setOrder(
+			?SitemapOrder $order
+		): void
 		{
 			$this->order = $order;
 		}
@@ -228,7 +245,9 @@
 		/**
 		 * @param SitemapType|null $fileType
 		 */
-		public final function setFileType( ?SitemapType $fileType ): void
+		public final function setFileType(
+			?SitemapType $fileType
+		): void
 		{
 			$this->fileType = $fileType;
 		}
@@ -244,7 +263,9 @@
         /**
          * @param SitemapSetting|null $settings
          */
-        public final function setSettings( ?SitemapSetting $settings ): void
+        public final function setSettings(
+			?SitemapSetting $settings
+		): void
         {
             $this->settings = $settings;
         }
@@ -260,7 +281,9 @@
         /**
          * @param SitemapLogLevel|null $logLevel
          */
-        public final function setLogLevel( ?SitemapLogLevel $logLevel ): void
+        public final function setLogLevel(
+			?SitemapLogLevel $logLevel
+		): void
         {
             $this->logLevel = $logLevel;
         }
@@ -277,7 +300,9 @@
          * @param Limit|null $limit
          * @return void
          */
-        public final function setLimit( ?Limit $limit ): void
+        public final function setLimit(
+			?Limit $limit
+		): void
         {
             $this->limit = $limit;
         }
@@ -293,7 +318,9 @@
         /**
          * @param IOWriter|null $writer
          */
-        public final function setWriter( ?IOWriter $writer ): void
+        public final function setWriter(
+			?IOWriter $writer
+		): void
         {
             $this->writer = $writer;
         }
@@ -317,7 +344,9 @@
         /**
          * @param SitemapLimitFactory|null $limitFactory
          */
-        public final function setLimitFactory( ?SitemapLimitFactory $limitFactory ): void
+        public final function setLimitFactory(
+			?SitemapLimitFactory $limitFactory
+		): void
         {
             $this->limitFactory = $limitFactory;
         }
@@ -325,7 +354,9 @@
         /**
          * @param SitemapWriterFactory|null $writerFactory
          */
-        public final function setWriterFactory( ?SitemapWriterFactory $writerFactory ): void
+        public final function setWriterFactory(
+			?SitemapWriterFactory $writerFactory
+		): void
         {
             $this->writerFactory = $writerFactory;
         }

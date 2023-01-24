@@ -19,7 +19,9 @@
         /**
          * @param SitemapGenerator $generator
          */
-        public function __construct( SitemapGenerator $generator )
+        public function __construct(
+			SitemapGenerator $generator
+		)
         {
             $this->setGenerator( $generator );
         }

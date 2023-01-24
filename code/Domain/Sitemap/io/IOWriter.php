@@ -12,7 +12,9 @@
         /**
          * @param SitemapBuffer|null $buffer
          */
-        public function __construct( ?SitemapBuffer $buffer )
+        public function __construct(
+			?SitemapBuffer $buffer
+		)
         {
             $this->setBuffer( $buffer );
         }
@@ -42,7 +44,9 @@
         /**
          * @param SitemapBuffer|null $buffer
          */
-        public final function setBuffer( ?SitemapBuffer $buffer ): void
+        public final function setBuffer(
+			?SitemapBuffer $buffer
+		): void
         {
             $this->buffer = $buffer;
         }

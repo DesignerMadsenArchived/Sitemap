@@ -13,13 +13,18 @@
          /**
           * @param SitemapBuffer|null $buffer
           */
-         public function __construct( ?SitemapBuffer $buffer )
+         public function __construct(
+			 ?SitemapBuffer $buffer
+		 )
          {
              parent::__construct( $buffer );
          }
 
+		 // Variables
          private ?string $write_cache = null;
 
+		 
+		 // Execute
          /**
           * @return string
           */
@@ -56,11 +61,15 @@
              return "";
          }
 
+		 
+		 // Internal
          /**
           * @param string $line
           * @return void
           */
-         protected function writeLine( string $line ): void
+         protected function writeLine(
+			 string $line
+		 ): void
          {
              $result = $this->getWriteCache() . $line;
              $this->setWriteCache( $result );
@@ -75,6 +84,7 @@
              $this->setWriteCache( $result );
          }
 
+		 // Accessors
          /**
           * @return string|null
           */
@@ -91,7 +101,9 @@
          /**
           * @param string|null $write_cache
           */
-         public function setWriteCache( ?string $write_cache ): void
+         public function setWriteCache(
+			 ?string $write_cache
+		 ): void
          {
              $this->write_cache = $write_cache;
          }

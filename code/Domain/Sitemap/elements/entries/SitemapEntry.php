@@ -14,7 +14,9 @@
          * @param string $url
          * @return SitemapEntry|null
          */
-        public final static function create( string $url ): ?SitemapEntry
+        public final static function create(
+			string $url
+		): ?SitemapEntry
         {
             $url_parsed = parse_url( $url );
 
@@ -32,8 +34,10 @@
         /**
          *
          */
-		public function __construct( string $url,
-                                     ?array $parsed = null )
+		public function __construct(
+			string $url,
+            ?array $parsed = null
+		)
 		{
             $this->setOriginal( $url );
             $this->setParsed( $parsed );
@@ -120,7 +124,9 @@
          * @param string $key
          * @return string|null
          */
-        protected final function getUrlElement( string $key ): ?string
+        protected final function getUrlElement(
+			string $key
+		): ?string
         {
             return $this->getParsed()[ $key ] ?? null;
         }
@@ -152,7 +158,9 @@
         /**
          * @param array|null $parsed
          */
-        protected final function setParsed( ?array $parsed ): void
+        protected final function setParsed(
+			?array $parsed
+		): void
         {
             $this->parsed = $parsed;
         }
@@ -168,7 +176,9 @@
         /**
          * @param bool $written
          */
-        public final function setWritten( bool $written ): void
+        public final function setWritten(
+			bool $written
+		): void
         {
             $this->written = $written;
         }
@@ -184,7 +194,9 @@
         /**
          * @param string|null $original
          */
-        public final function setOriginal( ?string $original ): void
+        public final function setOriginal(
+			?string $original
+		): void
         {
             $this->original = $original;
         }
@@ -201,7 +213,9 @@
          * @param int $length
          * @return void
          */
-        public function setLength( int $length ): void
+        public function setLength(
+			int $length
+		): void
         {
             $this->length = $length;
         }

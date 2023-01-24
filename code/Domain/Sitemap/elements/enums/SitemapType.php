@@ -10,12 +10,24 @@
 	 */
 	enum SitemapType
 	{
+		/**
+		 *
+		 */
 		case XML;
 		
+		/**
+		 *
+		 */
 		case RSS;
 		
+		/**
+		 *
+		 */
 		case TEXT;
-
+		
+		/**
+		 *
+		 */
         case UNKNOWN;
 	}
 ?>
