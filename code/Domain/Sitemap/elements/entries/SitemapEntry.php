@@ -21,7 +21,7 @@
             $url_parsed = parse_url( $url );
 
             if(
-				$url_parsed === false ||
+				$url_parsed == false ||
                 strlen( $url ) == self::zero
 			)
             {
@@ -50,17 +50,6 @@
                 strlen( $url )
             );
 		}
-
-        /**
-         * @return string
-         */
-        public function toString(): string
-        {
-            return $this->getUrlScheme()    .
-                   self::protocolSeparator  .
-                   $this->getUrlHost()      .
-                   $this->getUrlPath();
-        }
 
         /**
          * @return bool
@@ -245,5 +234,17 @@
             $this->length = $length;
         }
 
+		
+		// Object implementation
+		/**
+		 * @return string
+		 */
+		public function toString(): string
+		{
+			return $this->getUrlScheme()    .
+				   self::protocolSeparator  .
+				   $this->getUrlHost()      .
+				   $this->getUrlPath();
+		}
 	}
 ?>
