@@ -18,9 +18,10 @@
         private ?string $test_example = null;
         private ?SitemapGenerator $generator;
 
-		/**
-		 * @return int
-		 */
+        /**
+         * @return int
+         * @throws \Exception
+         */
 		public static function run(): int
 		{
 			$test = new Test();
@@ -34,7 +35,7 @@
         public function runTestB(): int
         {
             $sender = new GoogleSend( 'https://www.version2.dk/sitemap.xml' );
-            $sender->send();
+            $sender->execute();
 
             unset($sender);
             return -1;
