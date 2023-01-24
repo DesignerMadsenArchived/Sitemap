@@ -97,6 +97,7 @@
 
 
         /**
+		 *
          * @param SitemapEntry $entry
          * @return void
          */
@@ -104,7 +105,8 @@
 			SitemapEntry $entry
 		): void
         {
-            array_push($this->entries, $entry );
+			// https://www.php.net/manual/en/function.array-push.php
+            $this->entries[] = $entry;
         }
 
         /**

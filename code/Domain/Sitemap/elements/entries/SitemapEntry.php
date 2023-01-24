@@ -20,14 +20,18 @@
         {
             $url_parsed = parse_url( $url );
 
-            if( $url_parsed === false ||
-                strlen( $url ) == self::zero )
+            if(
+				$url_parsed === false ||
+                strlen( $url ) == self::zero
+			)
             {
                 return null;
             }
 
-            return new SitemapEntry( url: $url,
-                                     parsed: $url_parsed );
+            return new SitemapEntry(
+				url: $url,
+                parsed: $url_parsed
+			);
         }
 
 		// Constructor
@@ -71,28 +75,39 @@
 
             return true;
         }
+		
 
         // Variables
+			// Internal State
         private ?string $original = null;
+		
 		private ?array $parsed = null;
 
         private bool $written = false;
-        private ?int $length = null;
+        
+		private ?int $length = null;
 
         const zero = 0;
 
+			// Constants
         const scheme = 'scheme';
+		
         const host   = 'host';
-        const path   = 'path';
+        
+		const path   = 'path';
 
         const protocolSeparator = '://';
+		
 
+		// Is states
         /**
          * @return bool
          */
         public final function isSchemeNull(): bool
         {
-            return is_null( $this->getUrlScheme() );
+            return is_null(
+				$this->getUrlScheme()
+			);
         }
 
         /**
@@ -100,7 +115,9 @@
          */
         public final function isHostNull(): bool
         {
-            return is_null( $this->getUrlHost() );
+            return is_null(
+				$this->getUrlHost()
+			);
         }
 
         /**
@@ -108,7 +125,9 @@
          */
         public final function isPathNull(): bool
         {
-            return is_null( $this->getUrlPath() );
+            return is_null(
+				$this->getUrlPath()
+			);
         }
 
 		// Accessors
@@ -136,7 +155,9 @@
          */
         public final function getUrlScheme(): ?string
         {
-            return $this->getUrlElement( self::scheme );
+            return $this->getUrlElement(
+				self::scheme
+			);
         }
 
         /**
@@ -144,7 +165,9 @@
          */
         public final function getUrlHost(): ?string
         {
-            return $this->getUrlElement( self::host );
+            return $this->getUrlElement(
+				self::host
+			);
         }
 
         /**
@@ -152,7 +175,9 @@
          */
         public final function getUrlPath(): ?string
         {
-            return $this->getUrlElement( self::path );
+            return $this->getUrlElement(
+				self::path
+			);
         }
 
         /**
