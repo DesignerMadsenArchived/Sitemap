@@ -58,9 +58,13 @@
 
     "require":
     {
+        "php": ">=8.1",
+
         "io-jaegers/webformat-kit": "@dev",
         "io-jaegers/hrbf": "@dev",
         "io-jaegers/file-system": "@dev",
-        "ext-curl": "*"
+
+        "ext-curl": "*",
+        "ext-mbstring": "*"
     }
 }

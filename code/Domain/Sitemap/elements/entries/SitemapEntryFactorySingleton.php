@@ -20,9 +20,9 @@
 		
 		
 		/**
-		 * @return SitemapEntryFactory|null
+		 * @return SitemapEntryFactory
 		 */
-		public static function getFactory(): ?SitemapEntryFactory
+		public static function getFactory(): SitemapEntryFactory
 		{
 			if(
 				is_null(

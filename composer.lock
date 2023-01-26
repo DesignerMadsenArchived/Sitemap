@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f36bae8f202439930fc00229d5165d4",
+    "content-hash": "689718531896c908170b986a78e523b5",
     "packages": [
         {
             "name": "io-jaegers/file-system",
@@ -1872,7 +1872,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "ext-mbstring": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
