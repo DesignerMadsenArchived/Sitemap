@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "689718531896c908170b986a78e523b5",
+    "content-hash": "f85a8e5756555e1f8bbe20567e8ce5a6",
     "packages": [
         {
             "name": "io-jaegers/file-system",
@@ -433,12 +433,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "08b2022df9708328731f1e9094e81d720739acf8"
+                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/08b2022df9708328731f1e9094e81d720739acf8",
-                "reference": "08b2022df9708328731f1e9094e81d720739acf8",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/2cf940ebc6355a9d430462811b5aaa308b174bed",
+                "reference": "2cf940ebc6355a9d430462811b5aaa308b174bed",
                 "shasum": ""
             },
             "require": {
@@ -494,7 +494,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.24"
             },
             "funding": [
                 {
@@ -502,7 +502,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-24T14:18:22+00:00"
+            "time": "2023-01-26T08:26:55+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -751,12 +751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "aa658d693d68e23604fcd3504b6e5efd59d341ab"
+                "reference": "e6c588044e41e22777225c4339bce021113cc829"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/aa658d693d68e23604fcd3504b6e5efd59d341ab",
-                "reference": "aa658d693d68e23604fcd3504b6e5efd59d341ab",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e6c588044e41e22777225c4339bce021113cc829",
+                "reference": "e6c588044e41e22777225c4339bce021113cc829",
                 "shasum": ""
             },
             "require": {
@@ -845,7 +845,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-24T14:15:16+00:00"
+            "time": "2023-01-26T08:31:58+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -1872,6 +1872,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
+        "php": ">=8.1",
         "ext-curl": "*",
         "ext-mbstring": "*"
     },
