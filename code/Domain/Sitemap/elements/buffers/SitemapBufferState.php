@@ -4,7 +4,7 @@
 	 */
     namespace IoJaegers\Sitemap\Domain\Sitemap\elements\buffers;
 	
-	use IOJaegers\Hrbf\Math\Counters\IntegerCounter;
+	use IOJaegers\HRBF\Math\Counters\IntegerCounter;
 	
 	
 	/**
